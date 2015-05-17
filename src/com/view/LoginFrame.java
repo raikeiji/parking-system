@@ -7,6 +7,7 @@
 package com.view;
 
 import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
+import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -263,7 +264,7 @@ public class LoginFrame extends javax.swing.JFrame {
             public void run() {
                 new LoginFrame().setVisible(true);
                 try {
-                    UIManager.setLookAndFeel(GTKLookAndFeel.class.getName());
+                    UIManager.setLookAndFeel(WindowsLookAndFeel.class.getName());
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InstantiationException ex) {
@@ -273,7 +274,6 @@ public class LoginFrame extends javax.swing.JFrame {
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-//                LookAndFeelFactory.installJideExtension(LookAndFeelFactory.OFFICE2003_STYLE);
                 
             }
         });
