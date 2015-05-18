@@ -5,6 +5,27 @@
  */
 package com.view;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.krysalis.barcode4j.impl.datamatrix.DataMatrixBean;
+import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
+import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
+import org.krysalis.barcode4j.output.bitmap.BitmapEncoder;
+import org.krysalis.barcode4j.output.bitmap.BitmapEncoderRegistry;
+import org.krysalis.barcode4j.tools.UnitConv;
+
 /**
  *
  * @author rai
@@ -29,8 +50,8 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jTextFieldNomorKendaraan = new javax.swing.JTextField();
+        jButtonKonversi = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabelHasilKonversi = new javax.swing.JLabel();
         jButtonCetak = new javax.swing.JButton();
@@ -41,10 +62,10 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Nomor Kendaraan");
 
-        jButton1.setText("Konversi");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonKonversi.setText("Konversi");
+        jButtonKonversi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonKonversiActionPerformed(evt);
             }
         });
 
@@ -56,9 +77,9 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jButtonKonversi)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -67,8 +88,8 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonKonversi))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -90,7 +111,7 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(jLabelHasilKonversi)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButtonCetak.setText("Cetak");
@@ -131,9 +152,108 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonKonversiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKonversiActionPerformed
+
+        String msg = jTextFieldNomorKendaraan.getText();
+        String[] paramArr = new String[]{msg, "Sistem Parkir USD"};
+
+        //Create the barcode bean
+        DataMatrixBean bean = new DataMatrixBean();
+
+        final int dpi = 200;
+
+        //Configure the barcode generator
+        bean.setModuleWidth(UnitConv.in2mm(8.0f / dpi)); //makes a dot/module exactly eight pixels
+        bean.doQuietZone(false);
+        bean.setShape(SymbolShapeHint.FORCE_RECTANGLE);
+
+        boolean antiAlias = false;
+        int orientation = 0;
+        //Set up the canvas provider to create a monochrome bitmap
+        BitmapCanvasProvider canvas = new BitmapCanvasProvider(
+                dpi, BufferedImage.TYPE_BYTE_BINARY, antiAlias, orientation);
+
+        //Generate the barcode
+        bean.generateBarcode(canvas, msg);
+        try {
+            //Signal end of generation
+            canvas.finish();
+        } catch (IOException ex) {
+            Logger.getLogger(CetakBarCodeFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //Get generated bitmap
+        BufferedImage symbol = canvas.getBufferedImage();
+
+        int fontSize = 32; //pixels
+        int lineHeight = (int) (fontSize * 1.2);
+        Font font = new Font("Arial", Font.PLAIN, fontSize);
+        int width = symbol.getWidth();
+        int height = symbol.getHeight();
+        FontRenderContext frc = new FontRenderContext(new AffineTransform(), antiAlias, true);
+        for (int i = 0; i < paramArr.length; i++) {
+            String line = paramArr[i];
+            Rectangle2D bounds = font.getStringBounds(line, frc);
+            width = (int) Math.ceil(Math.max(width, bounds.getWidth()));
+            height += lineHeight;
+        }
+
+        //Add padding
+        int padding = 2;
+        width += 2 * padding;
+        height += 3 * padding;
+
+        BufferedImage bitmap = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
+        Graphics2D g2d = (Graphics2D) bitmap.getGraphics();
+        g2d.setBackground(Color.white);
+        g2d.setColor(Color.black);
+        g2d.clearRect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        g2d.setFont(font);
+
+        //Place the barcode symbol
+        AffineTransform symbolPlacement = new AffineTransform();
+        symbolPlacement.translate(padding, padding);
+        g2d.drawRenderedImage(symbol, symbolPlacement);
+
+        //Add text lines (or anything else you might want to add)
+        int y = padding + symbol.getHeight() + padding;
+        for (int i = 0; i < paramArr.length; i++) {
+            String line = paramArr[i];
+            y += lineHeight;
+            g2d.drawString(line, padding, y);
+        }
+        g2d.dispose();
+
+        //Encode bitmap as file
+        String mime = "image/png";
+        File outputFile = new File("/home/rai/Desktop/" + msg + ".png");
+        OutputStream out = null;
+        try {
+            out = new FileOutputStream(outputFile);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CetakBarCodeFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            final BitmapEncoder encoder = BitmapEncoderRegistry.getInstance(mime);
+            encoder.encode(bitmap, out, mime, dpi);
+        } catch (IOException ex) {
+            Logger.getLogger(CetakBarCodeFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                out.close();
+            } catch (IOException ex) {
+                Logger.getLogger(CetakBarCodeFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+
+    }//GEN-LAST:event_jButtonKonversiActionPerformed
 
     private void jButtonKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKeluarActionPerformed
         this.dispose();
@@ -175,13 +295,13 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCetak;
     private javax.swing.JButton jButtonKeluar;
+    private javax.swing.JButton jButtonKonversi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelHasilKonversi;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldNomorKendaraan;
     // End of variables declaration//GEN-END:variables
 }

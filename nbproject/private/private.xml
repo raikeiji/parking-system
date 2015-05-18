@@ -5,10 +5,14 @@
         <group>
             <file>file:/home/rai/java/SistemParkirUSD/src/com/view/LoginFrame.java</file>
             <file>file:/home/rai/java/SistemParkirUSD/src/com/view/PetugasMainFrame.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/model/Test.java</file>
             <file>file:/home/rai/java/SistemParkirUSD/src/com/view/CetakLaporanFrame.java</file>
             <file>file:/home/rai/java/SistemParkirUSD/src/com/view/PetugasListPengunjungFrame.java</file>
             <file>file:/home/rai/java/SistemParkirUSD/src/com/view/CetakBarCodeFrame.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/model/Petugas.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/model/Member.java</file>
             <file>file:/home/rai/java/SistemParkirUSD/src/com/view/AdminMainFrame.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/model/Kunjungan.java</file>
             <file>file:/home/rai/java/SistemParkirUSD/src/com/view/AdminListPengunjungFrame.java</file>
         </group>
     </open-files>

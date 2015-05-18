@@ -5,6 +5,8 @@
  */
 package com.view;
 
+
+
 /**
  *
  * @author rai
@@ -42,7 +44,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemListPengunjung = new javax.swing.JMenuItem();
-        jMenuItemCetakLaporan = new javax.swing.JMenuItem();
         jMenuItemCetakBarcode = new javax.swing.JMenuItem();
         jMenuItemKeluar = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
@@ -148,14 +149,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuItemListPengunjung);
 
-        jMenuItemCetakLaporan.setText("Cetak Laporan");
-        jMenuItemCetakLaporan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCetakLaporanActionPerformed(evt);
-            }
-        });
-        jMenuFile.add(jMenuItemCetakLaporan);
-
         jMenuItemCetakBarcode.setText("Cetak Barcode");
         jMenuItemCetakBarcode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,11 +229,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jMenuItemCetakLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCetakLaporanActionPerformed
-        CetakLaporanFrame s = new CetakLaporanFrame();
-        s.setVisible(true);
-    }//GEN-LAST:event_jMenuItemCetakLaporanActionPerformed
-
     private void jMenuItemListPengunjungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListPengunjungActionPerformed
 //        PetugasListPengunjungFrame p = new PetugasListPengunjungFrame();
 //        p.setVisible(true);
@@ -304,7 +292,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItemCetakBarcode;
-    private javax.swing.JMenuItem jMenuItemCetakLaporan;
     private javax.swing.JMenuItem jMenuItemKeluar;
     private javax.swing.JMenuItem jMenuItemListPengunjung;
     private javax.swing.JMenuItem jMenuItemTentang;
