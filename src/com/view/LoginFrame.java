@@ -9,6 +9,7 @@ package com.view;
 import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.awt.Color;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.LookAndFeel;
@@ -203,11 +204,23 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNoIDActionPerformed
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        if (jTextFieldNoID.getText().equals("test")&&jPasswordField.getText().equals("test")) {
-            PetugasMainFrame pmf=new PetugasMainFrame();
-            pmf.setVisible(true);
+        com.connection.connection.getConnectionUsingParameter(jTextFieldNoID.getText(), jPasswordField.getText());
+        if (jTextFieldNoID.getText().substring(3).equals("k.10")) {
+            try {
+                com.view.PetugasMainFrame ptm=new PetugasMainFrame();
+                ptm.setVisible(true);
+                this.dispose();
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }else{
-            AdminMainFrame amf=new AdminMainFrame();
+            com.view.AdminMainFrame amf = null;
+            try {
+                amf = new AdminMainFrame();
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
             amf.setVisible(true);
         }
     }//GEN-LAST:event_jButtonLoginActionPerformed
@@ -263,17 +276,17 @@ public class LoginFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginFrame().setVisible(true);
-                try {
-                    UIManager.setLookAndFeel(WindowsLookAndFeel.class.getName());
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnsupportedLookAndFeelException ex) {
-                    Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                try {
+//                    UIManager.setLookAndFeel(WindowsLookAndFeel.class.getName());
+//                } catch (ClassNotFoundException ex) {
+//                    Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (InstantiationException ex) {
+//                    Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (IllegalAccessException ex) {
+//                    Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (UnsupportedLookAndFeelException ex) {
+//                    Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+//                }
                 
             }
         });

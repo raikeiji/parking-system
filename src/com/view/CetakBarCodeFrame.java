@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import org.krysalis.barcode4j.impl.datamatrix.DataMatrixBean;
 import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
@@ -48,17 +50,23 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonKeluar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNomorKendaraan = new javax.swing.JTextField();
         jButtonKonversi = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabelHasilKonversi = new javax.swing.JLabel();
-        jButtonCetak = new javax.swing.JButton();
-        jButtonKeluar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Cetak Barcode");
+
+        jButtonKeluar.setText("Keluar");
+        jButtonKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonKeluarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nomor Kendaraan");
 
@@ -78,95 +86,79 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(jButtonKonversi)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonKonversi))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonKonversi)))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Form Hasil Konversi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 2, 10))); // NOI18N
-
-        jLabelHasilKonversi.setText("[Hasil Konversi]");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(185, 185, 185)
+                .addGap(25, 25, 25)
                 .addComponent(jLabelHasilKonversi)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addContainerGap()
                 .addComponent(jLabelHasilKonversi)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
-
-        jButtonCetak.setText("Cetak");
-
-        jButtonKeluar.setText("Keluar");
-        jButtonKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonKeluarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonCetak, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCetak)
-                    .addComponent(jButtonKeluar))
-                .addGap(21, 21, 21))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
+                .addComponent(jButtonKeluar)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonKonversiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKonversiActionPerformed
-
+        
         String msg = jTextFieldNomorKendaraan.getText();
         String[] paramArr = new String[]{msg, "Sistem Parkir USD"};
 
         //Create the barcode bean
         DataMatrixBean bean = new DataMatrixBean();
-
+        
         final int dpi = 200;
 
         //Configure the barcode generator
         bean.setModuleWidth(UnitConv.in2mm(8.0f / dpi)); //makes a dot/module exactly eight pixels
         bean.doQuietZone(false);
         bean.setShape(SymbolShapeHint.FORCE_RECTANGLE);
-
+        
         boolean antiAlias = false;
         int orientation = 0;
         //Set up the canvas provider to create a monochrome bitmap
@@ -184,7 +176,7 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
 
         //Get generated bitmap
         BufferedImage symbol = canvas.getBufferedImage();
-
+        
         int fontSize = 32; //pixels
         int lineHeight = (int) (fontSize * 1.2);
         Font font = new Font("Arial", Font.PLAIN, fontSize);
@@ -202,7 +194,7 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
         int padding = 2;
         width += 2 * padding;
         height += 3 * padding;
-
+        
         BufferedImage bitmap = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
         Graphics2D g2d = (Graphics2D) bitmap.getGraphics();
         g2d.setBackground(Color.white);
@@ -245,14 +237,20 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
                 Logger.getLogger(CetakBarCodeFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        
         try {
-
+            
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
         }
-
+        JOptionPane.showMessageDialog(this, "Plat nomor "+msg+" telah di cetak pada Desktop anda dengan nama "+msg+".png");
+//        ImageIcon icon = new ImageIcon(getClass().getResource("/home/rai/Desktop/"+msg+".png"));
+//        jLabelHasilKonversi.setIcon(icon);
+        ImageIcon icon=new ImageIcon("/home/rai/Desktop/"+msg+".png");
+        jLabelHasilKonversi.setIcon(icon);
+        jLabelHasilKonversi.setSize(5, 5);
+        jTextFieldNomorKendaraan.setText("");
     }//GEN-LAST:event_jButtonKonversiActionPerformed
 
     private void jButtonKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKeluarActionPerformed
@@ -295,7 +293,6 @@ public class CetakBarCodeFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCetak;
     private javax.swing.JButton jButtonKeluar;
     private javax.swing.JButton jButtonKonversi;
     private javax.swing.JLabel jLabel1;

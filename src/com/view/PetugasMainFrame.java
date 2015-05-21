@@ -5,19 +5,33 @@
  */
 package com.view;
 
-
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
  * @author rai
  */
-public class PetugasMainFrame extends javax.swing.JFrame {
+public final class PetugasMainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form PetugasMainFrame
+     * @throws java.sql.SQLException
      */
-    public PetugasMainFrame() {
+    public PetugasMainFrame() throws SQLException {
         initComponents();
+        tanggalTampil();
+        jamTampil();
+        TampilanAwal();
     }
 
     /**
@@ -30,18 +44,33 @@ public class PetugasMainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelPengunjung = new javax.swing.JPanel();
-        jLabelNomorKendaraan = new javax.swing.JLabel();
-        jLabelNoID = new javax.swing.JLabel();
+        jLabelyy = new javax.swing.JLabel();
+        jLabelxx = new javax.swing.JLabel();
         jTextFieldNoID = new javax.swing.JTextField();
         jTextFieldNomorKendaraan = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jPanelNomorKendaraan = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabelNama = new javax.swing.JLabel();
+        jLabelNoIdentitas = new javax.swing.JLabel();
+        jLabelSaldo = new javax.swing.JLabel();
+        jLabelNoParkir = new javax.swing.JLabel();
+        jLabelGambarPalang = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabelTanggal = new javax.swing.JLabel();
+        jLabelJamMasuk = new javax.swing.JLabel();
+        jLabelPlatNomor = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelJamKeluar = new javax.swing.JLabel();
         jButtonLogout = new javax.swing.JButton();
         jButtonBukaPalang = new javax.swing.JButton();
-        jLabelTanggal = new javax.swing.JLabel();
-        jLabelJam = new javax.swing.JLabel();
+        jLabelTanggalTampil = new javax.swing.JLabel();
+        jLabelJamTampil = new javax.swing.JLabel();
+        jButtonTutupPalang = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemListPengunjung = new javax.swing.JMenuItem();
@@ -52,25 +81,27 @@ public class PetugasMainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Frame Utama Petugas");
-        setPreferredSize(new java.awt.Dimension(670, 480));
 
         jPanelPengunjung.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Form Entri Kendaraan Masuk", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 2, 10))); // NOI18N
 
-        jLabelNomorKendaraan.setText("Nomor Kendaraan");
+        jLabelyy.setText("Plat Nomor");
 
-        jLabelNoID.setText("Nomor Identitas");
+        jLabelxx.setText("Nomor Identitas");
 
+        jTextFieldNoID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldNoIDMouseClicked(evt);
+            }
+        });
         jTextFieldNoID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNoIDActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Saldo");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        jTextFieldNomorKendaraan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldNomorKendaraanMouseClicked(evt);
             }
         });
 
@@ -82,57 +113,143 @@ public class PetugasMainFrame extends javax.swing.JFrame {
                 .addGap(98, 98, 98)
                 .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelPengunjungLayout.createSequentialGroup()
-                        .addComponent(jLabelNoID)
+                        .addComponent(jLabelxx)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldNoID, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPengunjungLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPengunjungLayout.createSequentialGroup()
-                        .addComponent(jLabelNomorKendaraan)
+                        .addComponent(jLabelyy)
                         .addGap(68, 68, 68)
                         .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         jPanelPengunjungLayout.setVerticalGroup(
             jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPengunjungLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNoID)
+                    .addComponent(jLabelxx)
                     .addComponent(jTextFieldNoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNomorKendaraan)
+                    .addComponent(jLabelyy)
                     .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelNomorKendaraan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nomor Kendaraan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 2, 10))); // NOI18N
+        jPanelNomorKendaraan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informasi Member", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 2, 10))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
-        jLabel2.setText("-- ---- -- ");
+        jLabel1.setText("Nama");
+
+        jLabel2.setText("No ID");
+
+        jLabel3.setText("Saldo");
+
+        jLabel4.setText("No Parkir");
+
+        jLabelNama.setText("--------");
+
+        jLabelNoIdentitas.setText("--------");
+
+        jLabelSaldo.setText("--------");
+
+        jLabelNoParkir.setText("--------");
+
+        jLabelGambarPalang.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabelGambarPalang.setForeground(new java.awt.Color(151, 149, 149));
+        jLabelGambarPalang.setText("Status");
+
+        jLabel6.setText("Tanggal");
+
+        jLabel7.setText("Jam Masuk");
+
+        jLabel8.setText("Plat Nomor");
+
+        jLabelTanggal.setText("----------");
+
+        jLabelJamMasuk.setText("----------");
+
+        jLabelPlatNomor.setText("----------");
+
+        jLabel5.setText("Jam Keluar");
+
+        jLabelJamKeluar.setText("----------");
 
         javax.swing.GroupLayout jPanelNomorKendaraanLayout = new javax.swing.GroupLayout(jPanelNomorKendaraan);
         jPanelNomorKendaraan.setLayout(jPanelNomorKendaraanLayout);
         jPanelNomorKendaraanLayout.setHorizontalGroup(
             jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
-                .addGap(232, 232, 232)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                                    .addGap(16, 16, 16)
+                                    .addComponent(jLabelNoIdentitas))
+                                .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabelNoParkir)))
+                            .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelSaldo)
+                                    .addComponent(jLabelNama)))))
+                    .addComponent(jLabel1))
+                .addGap(53, 53, 53)
+                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel5))
+                .addGap(38, 38, 38)
+                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                        .addComponent(jLabelTanggal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelGambarPalang)
+                        .addGap(37, 37, 37))
+                    .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelJamKeluar)
+                            .addComponent(jLabelJamMasuk)
+                            .addComponent(jLabelPlatNomor))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanelNomorKendaraanLayout.setVerticalGroup(
             jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel2)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabelTanggal)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabelNoIdentitas)
+                    .addComponent(jLabelGambarPalang))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelJamMasuk, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabelNoParkir)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabelNama)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelJamKeluar))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabelSaldo)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabelPlatNomor))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButtonLogout.setText("Logout");
@@ -142,13 +259,14 @@ public class PetugasMainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonBukaPalang.setText("Buka Palang");
+        jButtonBukaPalang.setText("Buka");
 
-        jLabelTanggal.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabelTanggal.setText("Tanggal");
+        jLabelTanggalTampil.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        jLabelTanggalTampil.setText("Tanggal");
 
-        jLabelJam.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabelJam.setText("Jam");
+        jLabelJamTampil.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+
+        jButtonTutupPalang.setText("Tutup");
 
         jMenuFile.setText("File");
 
@@ -199,29 +317,31 @@ public class PetugasMainFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonLogout)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonBukaPalang)
-                        .addContainerGap())
+                        .addComponent(jButtonBukaPalang, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonTutupPalang, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTanggal)
+                        .addComponent(jLabelTanggalTampil)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelJam)
-                        .addGap(92, 92, 92))))
+                        .addComponent(jLabelJamTampil)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTanggal)
-                    .addComponent(jLabelJam))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabelTanggalTampil)
+                    .addComponent(jLabelJamTampil))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelPengunjung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLogout)
-                    .addComponent(jButtonBukaPalang))
+                    .addComponent(jButtonBukaPalang)
+                    .addComponent(jButtonTutupPalang))
                 .addContainerGap())
         );
 
@@ -236,10 +356,6 @@ public class PetugasMainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNoIDActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jMenuItemListPengunjungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListPengunjungActionPerformed
         PetugasListPengunjungFrame p = new PetugasListPengunjungFrame();
         p.setVisible(true);
@@ -252,8 +368,79 @@ public class PetugasMainFrame extends javax.swing.JFrame {
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
         this.dispose();
+        LoginFrame lf=new LoginFrame();
+        lf.setVisible(true);
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
+    private void jTextFieldNoIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNoIDMouseClicked
+        jTextFieldNoID.setText("");
+    }//GEN-LAST:event_jTextFieldNoIDMouseClicked
+
+    private void jTextFieldNomorKendaraanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNomorKendaraanMouseClicked
+        jTextFieldNomorKendaraan.setText("");
+    }//GEN-LAST:event_jTextFieldNomorKendaraanMouseClicked
+
+    public void tanggalTampil() {
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        Calendar cal = Calendar.getInstance();
+        jLabelTanggalTampil.setText(dateFormat.format(cal.getTime()));
+        jLabelTanggalTampil.setFont(new Font("Dialog", 1, 30));
+
+    }
+
+    public void jamTampil() throws SQLException {
+        
+        jLabelJamTampil.setFont(new Font("Dialog", 1, 30));
+//        this.getContentPane().setLayout(new FlowLayout());
+//        this.getContentPane().add(jLabel2);
+        // ActionListener untuk Keperluan Timer
+        ActionListener taskPerformer = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                String nol_jam = "";
+                String nol_menit = "";
+                String nol_detik = "";
+                // Membuat Date
+                java.util.Date dt = new java.util.Date();
+                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
+                int nilai_jam = dt.getHours();
+                int nilai_menit = dt.getMinutes();
+                int nilai_detik = dt.getSeconds();
+                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_jam <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_jam = "0";
+                }
+                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_menit <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_menit = "0";
+                }
+                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_detik <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_detik = "0";
+                }
+                // Membuat String JAM, MENIT, DETIK
+                String jam = nol_jam + Integer.toString(nilai_jam);
+                String menit = nol_menit + Integer.toString(nilai_menit);
+                String detik = nol_detik + Integer.toString(nilai_detik);
+                // Menampilkan pada Layar
+                jLabelJamTampil.setText("  " + jam + " : " + menit + " : " + detik + "  ");
+            }
+        };
+        new Timer(1000, taskPerformer).start();
+    }
+
+    private void TampilanAwal(){
+        jTextFieldNoID.setText("Masukkan nomor ID");
+        jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());
+        jTextFieldNoID.setForeground(Color.GRAY);
+        jTextFieldNomorKendaraan.setText("Masukkan nomor plat");
+        jTextFieldNomorKendaraan.setPreferredSize(jTextFieldNomorKendaraan.getPreferredSize());
+        jTextFieldNomorKendaraan.setForeground(Color.GRAY);
+    }
     /**
      * @param args the command line arguments
      */
@@ -283,8 +470,13 @@ public class PetugasMainFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new PetugasMainFrame().setVisible(true);
+                try {
+                    new PetugasMainFrame().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PetugasMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -292,12 +484,28 @@ public class PetugasMainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBukaPalang;
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JButton jButtonTutupPalang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabelJam;
-    private javax.swing.JLabel jLabelNoID;
-    private javax.swing.JLabel jLabelNomorKendaraan;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelGambarPalang;
+    private javax.swing.JLabel jLabelJamKeluar;
+    private javax.swing.JLabel jLabelJamMasuk;
+    private javax.swing.JLabel jLabelJamTampil;
+    private javax.swing.JLabel jLabelNama;
+    private javax.swing.JLabel jLabelNoIdentitas;
+    private javax.swing.JLabel jLabelNoParkir;
+    private javax.swing.JLabel jLabelPlatNomor;
+    private javax.swing.JLabel jLabelSaldo;
     private javax.swing.JLabel jLabelTanggal;
+    private javax.swing.JLabel jLabelTanggalTampil;
+    private javax.swing.JLabel jLabelxx;
+    private javax.swing.JLabel jLabelyy;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
@@ -307,7 +515,6 @@ public class PetugasMainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemTentang;
     private javax.swing.JPanel jPanelNomorKendaraan;
     private javax.swing.JPanel jPanelPengunjung;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldNoID;
     private javax.swing.JTextField jTextFieldNomorKendaraan;
     // End of variables declaration//GEN-END:variables

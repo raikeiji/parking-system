@@ -5,19 +5,33 @@
  */
 package com.view;
 
-
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
  * @author rai
  */
-public class AdminMainFrame extends javax.swing.JFrame {
+public final class AdminMainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form PetugasMainFrame
+     * @throws java.sql.SQLException
      */
-    public AdminMainFrame() {
+    public AdminMainFrame() throws SQLException {
         initComponents();
+        tanggalTampil();
+        jamTampil();
+        TampilanAwal();
     }
 
     /**
@@ -29,18 +43,27 @@ public class AdminMainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelPengunjung = new javax.swing.JPanel();
-        jLabelNomorKendaraan = new javax.swing.JLabel();
-        jLabelNoID = new javax.swing.JLabel();
-        jTextFieldNoID = new javax.swing.JTextField();
-        jTextFieldNomorKendaraan = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPanelNomorKendaraan = new javax.swing.JPanel();
         jButtonLogout = new javax.swing.JButton();
-        jButtonBukaPalang = new javax.swing.JButton();
-        jLabelTanggal = new javax.swing.JLabel();
-        jLabelJam = new javax.swing.JLabel();
+        jButtonUpdatePetugas = new javax.swing.JButton();
+        jLabelTanggalTampil = new javax.swing.JLabel();
+        jLabelJamTampil = new javax.swing.JLabel();
+        jButtonBatalPetugas = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableDataMember = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButtonHapusPetugas = new javax.swing.JButton();
+        jButtonUpdateMember = new javax.swing.JButton();
+        jButtonBatalMember = new javax.swing.JButton();
+        jButtonHapusMember = new javax.swing.JButton();
+        jComboBoxKategoriCariMember = new javax.swing.JComboBox();
+        jTextFieldCariMember = new javax.swing.JTextField();
+        jButtonCariMember = new javax.swing.JButton();
+        jComboBoxKategoriCariPetugas = new javax.swing.JComboBox();
+        jTextFieldCariPetugas = new javax.swing.JTextField();
+        jButtonCariPetugas = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemListPengunjung = new javax.swing.JMenuItem();
@@ -51,78 +74,8 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Frame Utama Petugas");
-
-        jPanelPengunjung.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Form Entri Kendaraan Masuk", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 2, 10))); // NOI18N
-
-        jLabelNomorKendaraan.setText("Nomor Kendaraan");
-
-        jLabelNoID.setText("Nomor Identitas");
-
-        jTextFieldNoID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNoIDActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Saldo");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelPengunjungLayout = new javax.swing.GroupLayout(jPanelPengunjung);
-        jPanelPengunjung.setLayout(jPanelPengunjungLayout);
-        jPanelPengunjungLayout.setHorizontalGroup(
-            jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPengunjungLayout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelPengunjungLayout.createSequentialGroup()
-                        .addComponent(jLabelNoID)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldNoID, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPengunjungLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPengunjungLayout.createSequentialGroup()
-                        .addComponent(jLabelNomorKendaraan)
-                        .addGap(68, 68, 68)
-                        .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
-        jPanelPengunjungLayout.setVerticalGroup(
-            jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPengunjungLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNoID)
-                    .addComponent(jTextFieldNoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNomorKendaraan)
-                    .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jPanelNomorKendaraan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nomor Kendaraan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 2, 10))); // NOI18N
-
-        javax.swing.GroupLayout jPanelNomorKendaraanLayout = new javax.swing.GroupLayout(jPanelNomorKendaraan);
-        jPanelNomorKendaraan.setLayout(jPanelNomorKendaraanLayout);
-        jPanelNomorKendaraanLayout.setHorizontalGroup(
-            jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 569, Short.MAX_VALUE)
-        );
-        jPanelNomorKendaraanLayout.setVerticalGroup(
-            jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-        );
+        setPreferredSize(new java.awt.Dimension(1024, 720));
+        setResizable(false);
 
         jButtonLogout.setText("Logout");
         jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -131,13 +84,88 @@ public class AdminMainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonBukaPalang.setText("Buka Palang");
+        jButtonUpdatePetugas.setText("Update");
 
-        jLabelTanggal.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabelTanggal.setText("Tanggal");
+        jLabelTanggalTampil.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        jLabelTanggalTampil.setText("Tanggal");
 
-        jLabelJam.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabelJam.setText("Jam");
+        jLabelJamTampil.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+
+        jButtonBatalPetugas.setText("Batal");
+
+        jTableDataMember.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID Member", "Nama Member", "Alamat", "Saldo"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableDataMember);
+
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        jLabel1.setText("Data member yang aktif");
+
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        jLabel2.setText("Data petugas yang aktif");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID Petugas", "Nama Petugas", "Password"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jButtonHapusPetugas.setText("Hapus");
+
+        jButtonUpdateMember.setText("Update");
+
+        jButtonBatalMember.setText("Batal");
+
+        jButtonHapusMember.setText("Hapus");
+
+        jComboBoxKategoriCariMember.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "Id Petugas", "id Pengunjung2", "Tangga", "No Kendaraan", "Saldo", "Jam Masuk", "Jam Keluar" }));
+        jComboBoxKategoriCariMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxKategoriCariMemberActionPerformed(evt);
+            }
+        });
+
+        jButtonCariMember.setText("Cari");
+
+        jComboBoxKategoriCariPetugas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "Id Petugas", "id Pengunjung2", "Tangga", "No Kendaraan", "Saldo", "Jam Masuk", "Jam Keluar" }));
+        jComboBoxKategoriCariPetugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxKategoriCariPetugasActionPerformed(evt);
+            }
+        });
+
+        jButtonCariPetugas.setText("Cari");
 
         jMenuFile.setText("File");
 
@@ -180,60 +208,96 @@ public class AdminMainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPengunjung, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelNomorKendaraan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonLogout)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonBukaPalang)
-                        .addContainerGap())
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTanggal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelJam)
-                        .addGap(89, 89, 89))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelTanggalTampil)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelJamTampil))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jComboBoxKategoriCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonUpdateMember, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonBatalMember, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonHapusMember))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButtonLogout)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxKategoriCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                                .addComponent(jButtonUpdatePetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonBatalPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonHapusPetugas)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelJam)
-                    .addComponent(jLabelTanggal))
+                    .addComponent(jLabelTanggalTampil)
+                    .addComponent(jLabelJamTampil))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelPengunjung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jPanelNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonUpdateMember)
+                    .addComponent(jButtonBatalMember)
+                    .addComponent(jButtonHapusMember)
+                    .addComponent(jButtonCariMember)
+                    .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxKategoriCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLogout)
-                    .addComponent(jButtonBukaPalang))
-                .addContainerGap())
+                    .addComponent(jButtonUpdatePetugas)
+                    .addComponent(jButtonBatalPetugas)
+                    .addComponent(jButtonHapusPetugas)
+                    .addComponent(jButtonCariPetugas)
+                    .addComponent(jTextFieldCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxKategoriCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKeluarActionPerformed
-        this.dispose();
+       this.dispose();
     }//GEN-LAST:event_jMenuItemKeluarActionPerformed
 
-    private void jTextFieldNoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNoIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNoIDActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jMenuItemListPengunjungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListPengunjungActionPerformed
-//        PetugasListPengunjungFrame p = new PetugasListPengunjungFrame();
-//        p.setVisible(true);
-        AdminListPengunjungFrame alpf=new AdminListPengunjungFrame();
-        alpf.setVisible(true);
+        AdminListPengunjungFrame a=new AdminListPengunjungFrame();
+        a.setVisible(true);
     }//GEN-LAST:event_jMenuItemListPengunjungActionPerformed
 
     private void jMenuItemCetakBarcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCetakBarcodeActionPerformed
@@ -243,8 +307,79 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
         this.dispose();
+        LoginFrame lf=new LoginFrame();
+        lf.setVisible(true);
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
+    private void jComboBoxKategoriCariMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxKategoriCariMemberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxKategoriCariMemberActionPerformed
+
+    private void jComboBoxKategoriCariPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxKategoriCariPetugasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxKategoriCariPetugasActionPerformed
+
+    public void tanggalTampil() {
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        Calendar cal = Calendar.getInstance();
+        jLabelTanggalTampil.setText(dateFormat.format(cal.getTime()));
+        jLabelTanggalTampil.setFont(new Font("Dialog", 1, 30));
+
+    }
+
+    public void jamTampil() throws SQLException {
+        
+        jLabelJamTampil.setFont(new Font("Dialog", 1, 30));
+//        this.getContentPane().setLayout(new FlowLayout());
+//        this.getContentPane().add(jLabel2);
+        // ActionListener untuk Keperluan Timer
+        ActionListener taskPerformer = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                String nol_jam = "";
+                String nol_menit = "";
+                String nol_detik = "";
+                // Membuat Date
+                java.util.Date dt = new java.util.Date();
+                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
+                int nilai_jam = dt.getHours();
+                int nilai_menit = dt.getMinutes();
+                int nilai_detik = dt.getSeconds();
+                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_jam <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_jam = "0";
+                }
+                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_menit <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_menit = "0";
+                }
+                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_detik <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_detik = "0";
+                }
+                // Membuat String JAM, MENIT, DETIK
+                String jam = nol_jam + Integer.toString(nilai_jam);
+                String menit = nol_menit + Integer.toString(nilai_menit);
+                String detik = nol_detik + Integer.toString(nilai_detik);
+                // Menampilkan pada Layar
+                jLabelJamTampil.setText("  " + jam + " : " + menit + " : " + detik + "  ");
+            }
+        };
+        new Timer(1000, taskPerformer).start();
+    }
+
+    private void TampilanAwal(){
+//        jTextFieldNoID.setText("Masukkan nomor ID");
+//        jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());
+//        jTextFieldNoID.setForeground(Color.GRAY);
+//        jTextFieldNomorKendaraan.setText("Masukkan nomor plat");
+//        jTextFieldNomorKendaraan.setPreferredSize(jTextFieldNomorKendaraan.getPreferredSize());
+//        jTextFieldNomorKendaraan.setForeground(Color.GRAY);
+    }
     /**
      * @param args the command line arguments
      */
@@ -274,20 +409,33 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new AdminMainFrame().setVisible(true);
+                try {
+                    new AdminMainFrame().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonBukaPalang;
+    private javax.swing.JButton jButtonBatalMember;
+    private javax.swing.JButton jButtonBatalPetugas;
+    private javax.swing.JButton jButtonCariMember;
+    private javax.swing.JButton jButtonCariPetugas;
+    private javax.swing.JButton jButtonHapusMember;
+    private javax.swing.JButton jButtonHapusPetugas;
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JButton jButtonUpdateMember;
+    private javax.swing.JButton jButtonUpdatePetugas;
+    private javax.swing.JComboBox jComboBoxKategoriCariMember;
+    private javax.swing.JComboBox jComboBoxKategoriCariPetugas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabelJam;
-    private javax.swing.JLabel jLabelNoID;
-    private javax.swing.JLabel jLabelNomorKendaraan;
-    private javax.swing.JLabel jLabelTanggal;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelJamTampil;
+    private javax.swing.JLabel jLabelTanggalTampil;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
@@ -295,10 +443,11 @@ public class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemKeluar;
     private javax.swing.JMenuItem jMenuItemListPengunjung;
     private javax.swing.JMenuItem jMenuItemTentang;
-    private javax.swing.JPanel jPanelNomorKendaraan;
-    private javax.swing.JPanel jPanelPengunjung;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextFieldNoID;
-    private javax.swing.JTextField jTextFieldNomorKendaraan;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableDataMember;
+    private javax.swing.JTextField jTextFieldCariMember;
+    private javax.swing.JTextField jTextFieldCariPetugas;
     // End of variables declaration//GEN-END:variables
 }
