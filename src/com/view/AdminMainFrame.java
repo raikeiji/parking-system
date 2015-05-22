@@ -307,8 +307,8 @@ public final class AdminMainFrame extends javax.swing.JFrame {
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
         this.dispose();
-        LoginFrame lf=new LoginFrame();
-        lf.setVisible(true);
+       com.view.LoginFrame l=new LoginFrame();
+       l.setVisible(true);
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jComboBoxKategoriCariMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxKategoriCariMemberActionPerformed

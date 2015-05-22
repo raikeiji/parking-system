@@ -3,18 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.view;
 
-import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
-import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
+import com.control.LoginControl;
+import com.model.LoginModel;
+import com.view.AdminMainFrame;
+import com.view.in.PetugasMasukParkirFrame;
+import com.view.out.PetugasKeluarParkirFrame;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,6 +42,7 @@ public class LoginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanelTitle = new javax.swing.JPanel();
         jLabelTitle1 = new javax.swing.JLabel();
         jLabelLogoSistemParkir = new javax.swing.JLabel();
@@ -117,15 +121,15 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanelFormLoginLayout.setHorizontalGroup(
             jPanelFormLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFormLoginLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(123, 123, 123)
                 .addGroup(jPanelFormLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addGap(39, 39, 39)
-                .addGroup(jPanelFormLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldNoID)
-                    .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
-                .addGap(99, 99, 99))
+                .addGap(31, 31, 31)
+                .addGroup(jPanelFormLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldNoID, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelFormLoginLayout.setVerticalGroup(
             jPanelFormLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +138,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGroup(jPanelFormLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldNoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFormLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -204,25 +208,33 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNoIDActionPerformed
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        com.connection.connection.getConnectionUsingParameter(jTextFieldNoID.getText(), jPasswordField.getText());
-        if (jTextFieldNoID.getText().substring(3).equals("k.10")) {
-            try {
-                com.view.PetugasMainFrame ptm=new PetugasMainFrame();
-                ptm.setVisible(true);
-                this.dispose();
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            com.model.LoginModel lm = new LoginModel();
+
+            lm.setId_petugas(jTextFieldNoID.getText());
+            lm.setPassword(jPasswordField.getText());
+
+            status = cekDataLogin(lm);
+
+            switch (status) {
+                case "penjagain":
+                    com.view.in.PetugasMasukParkirFrame in = new PetugasMasukParkirFrame();
+                    in.setVisible(true);
+                    break;
+                case "penjagaout":
+                    com.view.out.PetugasKeluarParkirFrame out = new PetugasKeluarParkirFrame();
+                    out.setVisible(true);
+                    break;
+                case "admin" :
+                    com.view.AdminMainFrame adm=new AdminMainFrame();
+                    adm.setVisible(true);
+                    break;
             }
-            
-        }else{
-            com.view.AdminMainFrame amf = null;
-            try {
-                amf = new AdminMainFrame();
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            amf.setVisible(true);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKeluarActionPerformed
@@ -237,7 +249,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPasswordField.setText("");
     }//GEN-LAST:event_jPasswordFieldMouseClicked
 
-    private void TampilanAwal(){
+    private void TampilanAwal() {
         jTextFieldNoID.setText("Masukkan Nomor ID Anda");
         jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());
         jTextFieldNoID.setForeground(Color.GRAY);
@@ -245,6 +257,42 @@ public class LoginFrame extends javax.swing.JFrame {
         jPasswordField.setPreferredSize(jPasswordField.getPreferredSize());
         jPasswordField.setForeground(Color.GRAY);
     }
+
+    public String cekDataLogin(com.model.LoginModel lg) throws SQLException {
+        PreparedStatement prepare = null;
+        ResultSet result = null;
+
+        String id_number = lg.getId_petugas();
+        String password = lg.getPassword();
+
+        try {
+            conn=com.connection.Koneksi.getDBConnection();
+            conn.setAutoCommit(true);
+            String sql = "SELECT id_petugas, nama_petugas, password, status FROM PETUGAS WHERE ID_PETUGAS=? AND PASSWORD=?";
+            prepare = conn.prepareStatement(sql);
+            prepare.setString(1, id_number);
+            prepare.setString(2, password);
+            result = prepare.executeQuery();
+            if (result.next()) {
+                status = result.getString("status");
+
+            }
+            conn.commit();
+            conn.close();
+        } catch (SQLException e) {
+            conn.rollback();
+        }
+        return status;
+    }
+
+//    public static LoginControl getKoneksiLogin() throws SQLException {
+//        LoginControl kon = new LoginControl(com.connection.Koneksi.getDBConnection());
+//        return kon;
+//    }
+
+    String status = "";
+    private Connection conn = null;
+
     /**
      * @param args the command line arguments
      */
@@ -287,12 +335,13 @@ public class LoginFrame extends javax.swing.JFrame {
 //                } catch (UnsupportedLookAndFeelException ex) {
 //                    Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
 //                }
-                
+//                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonKeluar;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JLabel jLabel1;

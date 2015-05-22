@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.model;
 
 /**
  *
- * @author Arakhel
+ * @author Dion Wisnu
  */
 public class Petugas {
-    private String id_petugas, nama_petugas, password;
-
-    public Petugas(String id_petugas, String nama_petugas, String password) {
-        this.id_petugas = id_petugas;
-        this.nama_petugas = nama_petugas;
-        this.password = password;
-    }
+    private String id_petugas;
+    private String nama_petugas;
+    private String password;
 
     public String getId_petugas() {
         return id_petugas;
@@ -41,5 +38,6 @@ public class Petugas {
     public void setPassword(String password) {
         this.password = password;
     }
+    
     
 }
