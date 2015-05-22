@@ -7,7 +7,7 @@ package com.view;
 
 import com.control.LoginControl;
 import com.model.LoginModel;
-import com.view.AdminMainFrame;
+import com.view.admin.AdminMainFrame;
 import com.view.in.PetugasMasukParkirFrame;
 import com.view.out.PetugasKeluarParkirFrame;
 import java.awt.Color;
@@ -226,7 +226,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     out.setVisible(true);
                     break;
                 case "admin" :
-                    com.view.AdminMainFrame adm=new AdminMainFrame();
+                    com.view.admin.AdminMainFrame adm=new AdminMainFrame();
                     adm.setVisible(true);
                     break;
             }
@@ -280,6 +280,7 @@ public class LoginFrame extends javax.swing.JFrame {
             conn.commit();
             conn.close();
         } catch (SQLException e) {
+            
             conn.rollback();
         }
         return status;
