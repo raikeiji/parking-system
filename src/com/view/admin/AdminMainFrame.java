@@ -37,7 +37,7 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         initComponents();
         tanggalTampil();
         jamTampil();
-        TampilanAwal();
+        tampilanawal();
         DataMemberAktif();
         DataPetugasAktif();
     }
@@ -60,25 +60,22 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableDataPetugasAktif = new javax.swing.JTable();
-        jComboBoxKategoriCariMember = new javax.swing.JComboBox();
         jTextFieldCariMember = new javax.swing.JTextField();
         jButtonCariMember = new javax.swing.JButton();
-        jComboBoxKategoriCariPetugas = new javax.swing.JComboBox();
         jTextFieldCariPetugas = new javax.swing.JTextField();
         jButtonCariPetugas = new javax.swing.JButton();
+        jButtonKeluar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemListPengunjung = new javax.swing.JMenuItem();
         jMenuItemCetakBarcode = new javax.swing.JMenuItem();
         jMenuItemKeluar = new javax.swing.JMenuItem();
         jMenuMember = new javax.swing.JMenu();
-        jMenuItemDaftar = new javax.swing.JMenuItem();
-        jMenuItemUpdate = new javax.swing.JMenuItem();
-        jMenuItemHapus = new javax.swing.JMenuItem();
+        jMenuItemDaftarUpdateMember = new javax.swing.JMenuItem();
+        jMenuItemHapusMember = new javax.swing.JMenuItem();
         jMenuPetugas = new javax.swing.JMenu();
-        jMenuItemDaftar1 = new javax.swing.JMenuItem();
-        jMenuItemUpdate1 = new javax.swing.JMenuItem();
-        jMenuItemHapus1 = new javax.swing.JMenuItem();
+        jMenuItemDaftarUbahPetugas = new javax.swing.JMenuItem();
+        jMenuItemHapusPetugas = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemTentang = new javax.swing.JMenuItem();
 
@@ -147,23 +144,28 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableDataPetugasAktif);
 
-        jComboBoxKategoriCariMember.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "No ID", "Tanggal" }));
-        jComboBoxKategoriCariMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxKategoriCariMemberActionPerformed(evt);
+        jTextFieldCariMember.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldCariMemberMouseClicked(evt);
             }
         });
 
         jButtonCariMember.setText("Cari");
 
-        jComboBoxKategoriCariPetugas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "Id Petugas", "Nama Petugas" }));
-        jComboBoxKategoriCariPetugas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxKategoriCariPetugasActionPerformed(evt);
+        jTextFieldCariPetugas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldCariPetugasMouseClicked(evt);
             }
         });
 
         jButtonCariPetugas.setText("Cari");
+
+        jButtonKeluar.setText("Keluar");
+        jButtonKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonKeluarActionPerformed(evt);
+            }
+        });
 
         jMenuFile.setText("File");
 
@@ -195,27 +197,41 @@ public final class AdminMainFrame extends javax.swing.JFrame {
 
         jMenuMember.setText("Member");
 
-        jMenuItemDaftar.setText("Daftar");
-        jMenuMember.add(jMenuItemDaftar);
+        jMenuItemDaftarUpdateMember.setText("Daftar dan Ubah");
+        jMenuItemDaftarUpdateMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDaftarUpdateMemberActionPerformed(evt);
+            }
+        });
+        jMenuMember.add(jMenuItemDaftarUpdateMember);
 
-        jMenuItemUpdate.setText("Update");
-        jMenuMember.add(jMenuItemUpdate);
-
-        jMenuItemHapus.setText("Hapus");
-        jMenuMember.add(jMenuItemHapus);
+        jMenuItemHapusMember.setText("Hapus");
+        jMenuItemHapusMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHapusMemberActionPerformed(evt);
+            }
+        });
+        jMenuMember.add(jMenuItemHapusMember);
 
         jMenuBar1.add(jMenuMember);
 
         jMenuPetugas.setText("Petugas");
 
-        jMenuItemDaftar1.setText("Daftar");
-        jMenuPetugas.add(jMenuItemDaftar1);
+        jMenuItemDaftarUbahPetugas.setText("Daftar dan Ubah");
+        jMenuItemDaftarUbahPetugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDaftarUbahPetugasActionPerformed(evt);
+            }
+        });
+        jMenuPetugas.add(jMenuItemDaftarUbahPetugas);
 
-        jMenuItemUpdate1.setText("Update");
-        jMenuPetugas.add(jMenuItemUpdate1);
-
-        jMenuItemHapus1.setText("Hapus");
-        jMenuPetugas.add(jMenuItemHapus1);
+        jMenuItemHapusPetugas.setText("Hapus");
+        jMenuItemHapusPetugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHapusPetugasActionPerformed(evt);
+            }
+        });
+        jMenuPetugas.add(jMenuItemHapusPetugas);
 
         jMenuBar1.add(jMenuPetugas);
 
@@ -251,17 +267,15 @@ public final class AdminMainFrame extends javax.swing.JFrame {
                                 .addGap(0, 554, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jComboBoxKategoriCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonLogout)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonKeluar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBoxKategoriCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
@@ -280,8 +294,7 @@ public final class AdminMainFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCariMember)
-                    .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxKategoriCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -291,7 +304,7 @@ public final class AdminMainFrame extends javax.swing.JFrame {
                     .addComponent(jButtonLogout)
                     .addComponent(jButtonCariPetugas)
                     .addComponent(jTextFieldCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxKategoriCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonKeluar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -303,8 +316,12 @@ public final class AdminMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemKeluarActionPerformed
 
     private void jMenuItemListPengunjungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListPengunjungActionPerformed
-        AdminListPengunjungFrame a=new AdminListPengunjungFrame();
-        a.setVisible(true);
+        try {
+            AdminListPengunjungFrame a=new AdminListPengunjungFrame();
+            a.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItemListPengunjungActionPerformed
 
     private void jMenuItemCetakBarcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCetakBarcodeActionPerformed
@@ -318,16 +335,40 @@ public final class AdminMainFrame extends javax.swing.JFrame {
        l.setVisible(true);
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
-    private void jComboBoxKategoriCariMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxKategoriCariMemberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxKategoriCariMemberActionPerformed
+    private void jMenuItemDaftarUpdateMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDaftarUpdateMemberActionPerformed
+        DaftarUpdateMemberForm d=new DaftarUpdateMemberForm();
+        d.setVisible(true);
+    }//GEN-LAST:event_jMenuItemDaftarUpdateMemberActionPerformed
 
-    private void jComboBoxKategoriCariPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxKategoriCariPetugasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxKategoriCariPetugasActionPerformed
+    private void jMenuItemHapusMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHapusMemberActionPerformed
+        DeleteMemberForm d=new DeleteMemberForm();
+        d.setVisible(true);
+    }//GEN-LAST:event_jMenuItemHapusMemberActionPerformed
+
+    private void jMenuItemDaftarUbahPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDaftarUbahPetugasActionPerformed
+        DaftarUpdatePetugasForm d=new DaftarUpdatePetugasForm();
+        d.setVisible(true);
+    }//GEN-LAST:event_jMenuItemDaftarUbahPetugasActionPerformed
+
+    private void jMenuItemHapusPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHapusPetugasActionPerformed
+        DeletePetugasForm d=new DeletePetugasForm();
+        d.setVisible(true);
+    }//GEN-LAST:event_jMenuItemHapusPetugasActionPerformed
+
+    private void jButtonKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKeluarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButtonKeluarActionPerformed
+
+    private void jTextFieldCariMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldCariMemberMouseClicked
+        jTextFieldCariMember.setText("");
+    }//GEN-LAST:event_jTextFieldCariMemberMouseClicked
+
+    private void jTextFieldCariPetugasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldCariPetugasMouseClicked
+        jTextFieldCariPetugas.setText("");
+    }//GEN-LAST:event_jTextFieldCariPetugasMouseClicked
 
     public void tanggalTampil() {
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
         Calendar cal = Calendar.getInstance();
         jLabelTanggalTampil.setText(dateFormat.format(cal.getTime()));
@@ -379,14 +420,6 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         new Timer(1000, taskPerformer).start();
     }
 
-    private void TampilanAwal(){
-//        jTextFieldNoID.setText("Masukkan nomor ID");
-//        jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());
-//        jTextFieldNoID.setForeground(Color.GRAY);
-//        jTextFieldNomorKendaraan.setText("Masukkan nomor plat");
-//        jTextFieldNomorKendaraan.setPreferredSize(jTextFieldNomorKendaraan.getPreferredSize());
-//        jTextFieldNomorKendaraan.setForeground(Color.GRAY);
-    }
     
     public void DataMemberAktif() throws SQLException{
         List<com.model.Member> listMember=com.control.admin.AdminControl.getKoneksiAdminControl().tampilDataMember();
@@ -395,11 +428,20 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         jTableDataMember.setModel(model);
     }
     
-    public void DataPetugasAktif() throws SQLException{
+    private void DataPetugasAktif() throws SQLException{
         List<Petugas> listMember=com.control.admin.AdminControl.getKoneksiAdminControl().tampilDataPetugas();
         DataPetugasTableModel model=new DataPetugasTableModel(listMember);
         model.fireTableDataChanged();
         jTableDataPetugasAktif.setModel(model);
+    }
+    
+    private void tampilanawal(){
+        jTextFieldCariMember.setText("Cari berdasarkan Nomor ID Member");
+        jTextFieldCariMember.setPreferredSize(jTextFieldCariMember.getPreferredSize());
+        jTextFieldCariMember.setForeground(Color.GRAY);
+        jTextFieldCariPetugas.setText("Cari berdasarkan Nomor ID Petugas");
+        jTextFieldCariPetugas.setPreferredSize(jTextFieldCariPetugas.getPreferredSize());
+        jTextFieldCariPetugas.setForeground(Color.GRAY);
     }
     /**
      * @param args the command line arguments
@@ -444,9 +486,8 @@ public final class AdminMainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCariMember;
     private javax.swing.JButton jButtonCariPetugas;
+    private javax.swing.JButton jButtonKeluar;
     private javax.swing.JButton jButtonLogout;
-    private javax.swing.JComboBox jComboBoxKategoriCariMember;
-    private javax.swing.JComboBox jComboBoxKategoriCariPetugas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelJamTampil;
@@ -455,15 +496,13 @@ public final class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItemCetakBarcode;
-    private javax.swing.JMenuItem jMenuItemDaftar;
-    private javax.swing.JMenuItem jMenuItemDaftar1;
-    private javax.swing.JMenuItem jMenuItemHapus;
-    private javax.swing.JMenuItem jMenuItemHapus1;
+    private javax.swing.JMenuItem jMenuItemDaftarUbahPetugas;
+    private javax.swing.JMenuItem jMenuItemDaftarUpdateMember;
+    private javax.swing.JMenuItem jMenuItemHapusMember;
+    private javax.swing.JMenuItem jMenuItemHapusPetugas;
     private javax.swing.JMenuItem jMenuItemKeluar;
     private javax.swing.JMenuItem jMenuItemListPengunjung;
     private javax.swing.JMenuItem jMenuItemTentang;
-    private javax.swing.JMenuItem jMenuItemUpdate;
-    private javax.swing.JMenuItem jMenuItemUpdate1;
     private javax.swing.JMenu jMenuMember;
     private javax.swing.JMenu jMenuPetugas;
     private javax.swing.JScrollPane jScrollPane1;

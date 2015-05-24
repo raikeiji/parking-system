@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.view.admin;
 
 import com.control.editmember.EditMemberControl;
 import com.model.Member;
+import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -22,6 +22,7 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
      */
     public DaftarUpdateMemberForm() {
         initComponents();
+        tampilanawal();
     }
 
     /**
@@ -50,6 +51,7 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
         jTextAreaAlamat = new javax.swing.JTextArea();
         jButtonSimpan = new javax.swing.JButton();
         jButtonBatal = new javax.swing.JButton();
+        jButtonKeluar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Pendaftaran Member");
@@ -111,6 +113,11 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
                 jTextFieldNoIDActionPerformed(evt);
             }
         });
+        jTextFieldNoID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldNoIDKeyTyped(evt);
+            }
+        });
 
         jTextFieldNama.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -122,8 +129,24 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
 
         jLabel3.setText("Saldo");
 
+        jTextFieldSaldo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldSaldoMouseClicked(evt);
+            }
+        });
+        jTextFieldSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSaldoActionPerformed(evt);
+            }
+        });
+
         jTextAreaAlamat.setColumns(20);
         jTextAreaAlamat.setRows(5);
+        jTextAreaAlamat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextAreaAlamatMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextAreaAlamat);
 
         javax.swing.GroupLayout jPanelPengunjungLayout = new javax.swing.GroupLayout(jPanelPengunjung);
@@ -182,6 +205,18 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
         });
 
         jButtonBatal.setText("Batal");
+        jButtonBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBatalActionPerformed(evt);
+            }
+        });
+
+        jButtonKeluar.setText("Keluar");
+        jButtonKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonKeluarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,7 +228,8 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelPengunjung, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonKeluar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonSimpan)))
@@ -205,11 +241,17 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelPengunjung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonBatal)
-                    .addComponent(jButtonSimpan))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonBatal)
+                            .addComponent(jButtonSimpan))
+                        .addContainerGap(18, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonKeluar)
+                        .addContainerGap())))
         );
 
         pack();
@@ -240,18 +282,82 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
 //                System.out.println("Update Data Berhasil");
 //                EditMemberControl.getKoneksiEditMember().hapusDataMember(mb);
 //                System.out.println("Hapus Data Member Berhasil");
-                JOptionPane.showMessageDialog(rootPane, "Data telah ");
+
+//                JOptionPane.showMessageDialog(rootPane, "Pendaftaran gagal, member sudah terdaftar");
+                int selectedOption = JOptionPane.showConfirmDialog(null,
+                        "Pendaftaran gagal, member sudah terdaftar, apakah anda ingin mengupdate?",
+                        "Update",
+                        JOptionPane.YES_NO_OPTION);
+                if (selectedOption == JOptionPane.YES_OPTION) {
+                    EditMemberControl.getKoneksiEditMember().updateDataMember(mb);
+                    JOptionPane.showMessageDialog(rootPane, "Update Data Berhasil");
+                    tampilanawal();
+                }
             } else {
 //                EditMemberControl.getKoneksiEditMember().pendaftaranMemberBaru(mb);
 //                System.out.println("Pendaftaran Berhasil");
 //                System.out.println("Update Data Gagal, member belum terdaftar");
 //                System.out.println("Hapus Data Member Gagal, data tidak ditemukan");
+                EditMemberControl.getKoneksiEditMember().pendaftaranMemberBaru(mb);
+                JOptionPane.showMessageDialog(rootPane, "Pendaftaran Berhasil");
+
             }
 
         } catch (SQLException ex) {
             System.out.println("Kueri gagal : " + ex.getMessage());
         }
     }//GEN-LAST:event_jButtonSimpanActionPerformed
+
+    private void jTextFieldNoIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNoIDKeyTyped
+//        Member mb = new Member();
+//        mb.setId_member(jTextFieldNoID.getText());
+//        mb.setNama_member(jTextFieldNama.getText());
+//        mb.setAlamat(jTextAreaAlamat.getText());
+//        mb.setSaldo(jTextFieldSaldo.getText());
+//        try {
+//            EditMemberControl.getKoneksiEditMember().cekDataMember(mb);
+//            jTextFieldNama.setText(mb.getNama_member());
+//            jTextFieldSaldo.setText(mb.getSaldo());
+//            jTextAreaAlamat.setText(mb.getAlamat());
+//        } catch (Exception e) {
+//            System.err.println("error : "+e);
+//        }
+    }//GEN-LAST:event_jTextFieldNoIDKeyTyped
+
+    private void jTextFieldSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSaldoActionPerformed
+        jTextFieldSaldo.setText("");
+    }//GEN-LAST:event_jTextFieldSaldoActionPerformed
+
+    private void jTextAreaAlamatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaAlamatMouseClicked
+        jTextAreaAlamat.setText("");
+    }//GEN-LAST:event_jTextAreaAlamatMouseClicked
+
+    private void jTextFieldSaldoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldSaldoMouseClicked
+        jTextFieldSaldo.setText("");
+    }//GEN-LAST:event_jTextFieldSaldoMouseClicked
+
+    private void jButtonBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatalActionPerformed
+        tampilanawal();
+    }//GEN-LAST:event_jButtonBatalActionPerformed
+
+    private void jButtonKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKeluarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonKeluarActionPerformed
+
+    private void tampilanawal() {
+        jTextFieldNoID.setText("Input Nomor ID");
+        jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());
+        jTextFieldNoID.setForeground(Color.GRAY);
+        jTextFieldNama.setText("Input nama");
+        jTextFieldNama.setPreferredSize(jTextFieldNama.getPreferredSize());
+        jTextFieldNama.setForeground(Color.GRAY);
+        jTextFieldSaldo.setText("Input saldo");
+        jTextFieldSaldo.setPreferredSize(jTextFieldNama.getPreferredSize());
+        jTextFieldSaldo.setForeground(Color.GRAY);
+        jTextAreaAlamat.setText("Input alamat");
+        jTextAreaAlamat.setPreferredSize(jTextFieldNama.getPreferredSize());
+        jTextAreaAlamat.setForeground(Color.GRAY);
+    }
 
     /**
      * @param args the command line arguments
@@ -290,6 +396,7 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBatal;
+    private javax.swing.JButton jButtonKeluar;
     private javax.swing.JButton jButtonSimpan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -40,20 +40,21 @@
             <Property name="text" type="java.lang.String" value="Member"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDaftar">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDaftarUpdateMember">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Daftar"/>
+                <Property name="text" type="java.lang.String" value="Daftar dan Ubah"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDaftarUpdateMemberActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUpdate">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Update"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHapus">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHapusMember">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Hapus"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemHapusMemberActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -62,20 +63,21 @@
             <Property name="text" type="java.lang.String" value="Petugas"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDaftar1">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDaftarUbahPetugas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Daftar"/>
+                <Property name="text" type="java.lang.String" value="Daftar dan Ubah"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDaftarUbahPetugasActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUpdate1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Update"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHapus1">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHapusPetugas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Hapus"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemHapusPetugasActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -144,18 +146,16 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jComboBoxKategoriCariMember" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jTextFieldCariMember" min="-2" pref="164" max="-2" attributes="0"/>
+                              <Component id="jTextFieldCariMember" min="-2" pref="266" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButtonCariMember" min="-2" pref="74" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jButtonLogout" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonKeluar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jComboBoxKategoriCariPetugas" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jTextFieldCariPetugas" min="-2" pref="164" max="-2" attributes="0"/>
+                              <Component id="jTextFieldCariPetugas" min="-2" pref="263" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButtonCariPetugas" min="-2" pref="74" max="-2" attributes="0"/>
                           </Group>
@@ -182,7 +182,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonCariMember" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldCariMember" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBoxKategoriCariMember" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -193,7 +192,7 @@
                   <Component id="jButtonLogout" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonCariPetugas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldCariPetugas" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBoxKategoriCariPetugas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonKeluar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -330,47 +329,33 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="jComboBoxKategoriCariMember">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Pilih Kategori--"/>
-            <StringItem index="1" value="No ID"/>
-            <StringItem index="2" value="Tanggal"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxKategoriCariMemberActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCariMember">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextFieldCariMemberMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCariMember">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cari"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxKategoriCariPetugas">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Pilih Kategori--"/>
-            <StringItem index="1" value="Id Petugas"/>
-            <StringItem index="2" value="Nama Petugas"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxKategoriCariPetugasActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCariPetugas">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextFieldCariPetugasMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCariPetugas">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cari"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonKeluar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Keluar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonKeluarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -8,6 +8,7 @@ package com.control.editmember;
 
 
 import com.connection.Koneksi;
+import com.model.Kunjungan;
 import com.model.Member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -102,4 +103,33 @@ public class EditMemberControl {
         conn.close();
     }
             
+    public void tampilDataMemberMasuk(Member mem) throws SQLException {
+        Statement stmt = conn.createStatement();
+//        Member member = new Member();
+//        String id_member = kunjungan.getId_member().getId_member();
+        String id_member=mem.getId_member();
+        String sql = "select * from MEMBER where ID_MEMBER='"+id_member+"'";
+        try {
+            ResultSet rset = stmt.executeQuery(sql);
+            while (rset.next()) {
+//                member.setId_member(rset.getString("id_member"));
+//                member.setNama_member(rset.getString("nama_member"));
+//                member.setSaldo(rset.getString("saldo"));
+//                kunjungan.setId_member(member);
+//                kunjungan.setNo_parkir(rset.getString("no_parkir"));
+//                kunjungan.setTanggal_parkir(rset.getString("tanggal_parkir"));
+//                kunjungan.setJam_masuk(rset.getString("jam_masuk"));
+//                kunjungan.setPlat_nomor(rset.getString("plat_nomor"));
+                mem.setId_member(rset.getString(2));
+                mem.setAlamat(rset.getString(3));
+                mem.setSaldo(rset.getString(4));
+            }
+        } catch (SQLException x) {
+            System.out.println("Error = " + x.getMessage());
+        }
+        conn.commit();
+        conn.close();
+    }
+
+    
 }
