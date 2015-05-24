@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.control.admin;
+package com.model;
 
 import com.model.Member;
 import java.util.ArrayList;

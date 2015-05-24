@@ -5,6 +5,9 @@
  */
 package com.view.admin;
 
+import com.model.DataMemberTableModel;
+import com.model.DataPetugasTableModel;
+import com.model.Petugas;
 import com.view.CetakBarCodeFrame;
 import com.view.LoginFrame;
 import java.awt.Color;
@@ -15,6 +18,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
@@ -34,6 +38,8 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         tanggalTampil();
         jamTampil();
         TampilanAwal();
+        DataMemberAktif();
+        DataPetugasAktif();
     }
 
     /**
@@ -53,7 +59,7 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableDataPetugasAktif = new javax.swing.JTable();
         jComboBoxKategoriCariMember = new javax.swing.JComboBox();
         jTextFieldCariMember = new javax.swing.JTextField();
         jButtonCariMember = new javax.swing.JButton();
@@ -123,7 +129,7 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
         jLabel2.setText("Data petugas yang aktif");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableDataPetugasAktif.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -139,7 +145,7 @@ public final class AdminMainFrame extends javax.swing.JFrame {
                 "ID Petugas", "Nama Petugas", "Password"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTableDataPetugasAktif);
 
         jComboBoxKategoriCariMember.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "No ID", "Tanggal" }));
         jComboBoxKategoriCariMember.addActionListener(new java.awt.event.ActionListener() {
@@ -381,6 +387,20 @@ public final class AdminMainFrame extends javax.swing.JFrame {
 //        jTextFieldNomorKendaraan.setPreferredSize(jTextFieldNomorKendaraan.getPreferredSize());
 //        jTextFieldNomorKendaraan.setForeground(Color.GRAY);
     }
+    
+    public void DataMemberAktif() throws SQLException{
+        List<com.model.Member> listMember=com.control.admin.AdminControl.getKoneksiAdminControl().tampilDataMember();
+        DataMemberTableModel model=new DataMemberTableModel(listMember);
+        model.fireTableDataChanged();
+        jTableDataMember.setModel(model);
+    }
+    
+    public void DataPetugasAktif() throws SQLException{
+        List<Petugas> listMember=com.control.admin.AdminControl.getKoneksiAdminControl().tampilDataPetugas();
+        DataPetugasTableModel model=new DataPetugasTableModel(listMember);
+        model.fireTableDataChanged();
+        jTableDataPetugasAktif.setModel(model);
+    }
     /**
      * @param args the command line arguments
      */
@@ -448,8 +468,8 @@ public final class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuPetugas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableDataMember;
+    private javax.swing.JTable jTableDataPetugasAktif;
     private javax.swing.JTextField jTextFieldCariMember;
     private javax.swing.JTextField jTextFieldCariPetugas;
     // End of variables declaration//GEN-END:variables

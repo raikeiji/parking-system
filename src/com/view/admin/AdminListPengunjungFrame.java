@@ -6,6 +6,13 @@
 
 package com.view.admin;
 
+import com.model.DataListParkirTabelforAdmin;
+import com.model.Kunjungan;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author rai
@@ -15,8 +22,9 @@ public class AdminListPengunjungFrame extends javax.swing.JFrame {
     /**
      * Creates new form PetugasMainFrame
      */
-    public AdminListPengunjungFrame() {
+    public AdminListPengunjungFrame() throws SQLException {
         initComponents();
+        listParkir();
     }
 
     /**
@@ -35,9 +43,6 @@ public class AdminListPengunjungFrame extends javax.swing.JFrame {
         jButtonClose = new javax.swing.JButton();
         jButtonCari = new javax.swing.JButton();
         jTextFieldCari = new javax.swing.JTextField();
-        jComboBoxKategoriCari = new javax.swing.JComboBox();
-        jButtonPerbaharui = new javax.swing.JButton();
-        jButtonHapus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Utama Petugas");
@@ -100,31 +105,14 @@ public class AdminListPengunjungFrame extends javax.swing.JFrame {
 
         jButtonCari.setText("Cari");
 
-        jComboBoxKategoriCari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "Id Petugas", "id Pengunjung2", "Tangga", "No Kendaraan", "Saldo", "Jam Masuk", "Jam Keluar" }));
-        jComboBoxKategoriCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxKategoriCariActionPerformed(evt);
-            }
-        });
-
-        jButtonPerbaharui.setText("Perbaharui");
-
-        jButtonHapus.setText("Hapus");
-
         javax.swing.GroupLayout jPanelTombolLayout = new javax.swing.GroupLayout(jPanelTombol);
         jPanelTombol.setLayout(jPanelTombolLayout);
         jPanelTombolLayout.setHorizontalGroup(
             jPanelTombolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTombolLayout.createSequentialGroup()
-                .addComponent(jComboBoxKategoriCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCari, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonPerbaharui)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonHapus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonClose)
                 .addContainerGap())
@@ -136,10 +124,7 @@ public class AdminListPengunjungFrame extends javax.swing.JFrame {
                 .addGroup(jPanelTombolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClose)
                     .addComponent(jButtonCari)
-                    .addComponent(jTextFieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxKategoriCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPerbaharui)
-                    .addComponent(jButtonHapus))
+                    .addComponent(jTextFieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -167,14 +152,16 @@ public class AdminListPengunjungFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxKategoriCariActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxKategoriCariActionPerformed
-
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
+    private void listParkir() throws SQLException {
+        List<Kunjungan> listParkir=com.control.admin.AdminControl.getKoneksiAdminControl().tampilListDataParkir();
+        DataListParkirTabelforAdmin model=new DataListParkirTabelforAdmin(listParkir);
+        model.fireTableDataChanged();
+        jTablePengunjung.setModel(model);
+    }
     /**
      * @param args the command line arguments
      */
@@ -205,7 +192,11 @@ public class AdminListPengunjungFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminListPengunjungFrame().setVisible(true);
+                try {
+                    new AdminListPengunjungFrame().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminListPengunjungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -213,9 +204,6 @@ public class AdminListPengunjungFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCari;
     private javax.swing.JButton jButtonClose;
-    private javax.swing.JButton jButtonHapus;
-    private javax.swing.JButton jButtonPerbaharui;
-    private javax.swing.JComboBox jComboBoxKategoriCari;
     private javax.swing.JPanel jPanelTabelPengunjung;
     private javax.swing.JPanel jPanelTombol;
     private javax.swing.JScrollPane jScrollPane1;

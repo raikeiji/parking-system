@@ -103,4 +103,67 @@ public class AdminControl {
         }
     }
     
+    public List<Kunjungan> tampilListDataParkir() throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        Member mb = new Member();
+        Petugas pt = new Petugas();
+        try {
+//            conn.setAutoCommit(false);
+//            statement = conn.prepareStatement("select no_parkir, plat_nomor, id_petugas, id_member, jam_keluar, tanggal_parkir, status"
+//                    + "from kunjungan order by tanggal_parkir");
+
+//            statement = conn.prepareStatement("select no_parkir, plat_nomor, id_petugas, id_member, jam_keluar, tanggal_parkir, status"
+//                    + " from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'keluar' order by tanggal_parkir");
+            
+            statement=conn.prepareStatement("select k.ID_PETUGAS, k.ID_MEMBER, k.TANGGAL_PARKIR, k.PLAT_NOMOR, m.SALDO, k.JAM_MASUK, k.JAM_KELUAR from kunjungan k, member m " +
+                                    "where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND k.ID_MEMBER=m.ID_MEMBER order by k.TANGGAL_PARKIR");
+//            statement=conn.prepareStatement("select * from kunjungan where status = 'keluar' order by tanggal_parkir");
+            
+            result = statement.executeQuery();
+            List<Kunjungan> kategoris = new ArrayList<Kunjungan>();
+            while (result.next()) {
+                Kunjungan dkp = new Kunjungan();
+                
+//                pt.setId_petugas(result.getString("id_petugas"));
+//                mb.setId_member(result.getString("id_member"));
+//                
+//                dkp.setTanggal_parkir(result.getString("tanggal_parkir"));
+//                dkp.setPlat_nomor(result.getString("plat_nomor"));
+//                mb.setSaldo(result.getString("saldo"));
+//                dkp.setJam_masuk(result.getString("jam_masuk"));
+//                dkp.setJam_keluar(result.getString("jam_keluar"));
+
+                pt.setId_petugas(result.getString(1));
+                mb.setId_member(result.getString(2));
+                
+                dkp.setTanggal_parkir(result.getString(3));
+                dkp.setPlat_nomor(result.getString(4));
+                mb.setSaldo(result.getString(5));
+                dkp.setJam_masuk(result.getString(6));
+                dkp.setJam_keluar(result.getString(7));
+                
+                dkp.setId_member(mb);
+                dkp.setId_petugas(pt);
+                kategoris.add(dkp);
+            }
+            conn.commit();
+            return kategoris;
+        } catch (SQLException exception) {
+            throw exception;
+        } finally {
+            try {
+                conn.setAutoCommit(true);
+                if (result != null) {
+                    result.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException exception) {
+                throw exception;
+            }
+        }
+    }
+    
 }
