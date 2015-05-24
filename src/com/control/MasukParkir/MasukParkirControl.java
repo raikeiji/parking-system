@@ -8,11 +8,14 @@ package com.control.MasukParkir;
 import com.connection.Koneksi;
 import com.model.Kunjungan;
 import com.model.Member;
+import com.model.Petugas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -139,10 +142,10 @@ public class MasukParkirControl {
 //        } else if (!MasukParkirControl.getKoneksiMasukParkir().getLastNoParkir()) {
 //           no_parkir = getKoneksiMasukParkir().getNewNoParkir();
 //        }
-        try{
+        try {
             MasukParkirControl.getKoneksiMasukParkir().getLastNoParkir();
             no_parkir = getKoneksiMasukParkir().getNextNoParkir();
-        }catch(NullPointerException ne){
+        } catch (NullPointerException ne) {
             no_parkir = MasukParkirControl.getKoneksiMasukParkir().getNewNoParkir();
         }
         try {
@@ -187,5 +190,48 @@ public class MasukParkirControl {
         }
         conn.commit();
         conn.close();
+    }
+
+    public List<Kunjungan> tampilDataParkirMasuk() throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        Member mb = new Member();
+        Petugas pt = new Petugas();
+        try {
+//            conn.setAutoCommit(false);
+            statement = conn.prepareStatement("select * from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'masuk' order by tanggal_parkir");
+            result = statement.executeQuery();
+            List<Kunjungan> kategoris = new ArrayList<Kunjungan>();
+            while (result.next()) {
+                Kunjungan dataKunjunganMasuk = new Kunjungan();
+                dataKunjunganMasuk.setNo_parkir(result.getString("no_parkir"));
+                dataKunjunganMasuk.setPlat_nomor(result.getString("plat_nomor"));
+                pt.setId_petugas(result.getString("id_petugas"));
+                dataKunjunganMasuk.setId_petugas(pt);
+                mb.setId_member(result.getString("id_member"));
+                dataKunjunganMasuk.setId_member(mb);
+                dataKunjunganMasuk.setJam_masuk(result.getString("jam_masuk"));
+                dataKunjunganMasuk.setTanggal_parkir(result.getString("tanggal_parkir"));
+                dataKunjunganMasuk.setStatus(result.getString("status"));
+                kategoris.add(dataKunjunganMasuk);
+            }
+            conn.commit();
+            return kategoris;
+        } catch (SQLException exception) {
+            throw exception;
+        } finally {
+            try {
+                conn.setAutoCommit(true);
+                if (result != null) {
+                    result.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException exception) {
+                throw exception;
+            }
+        }
+
     }
 }

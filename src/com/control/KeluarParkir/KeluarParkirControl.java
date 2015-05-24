@@ -8,11 +8,14 @@ package com.control.KeluarParkir;
 import com.connection.Koneksi;
 import com.model.Kunjungan;
 import com.model.Member;
+import com.model.Petugas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -55,7 +58,7 @@ public class KeluarParkirControl {
         String id_member = kunjungan.getId_member().getId_member();
         String plat_no = kunjungan.getPlat_nomor();
         boolean status = false;
-        String sql = "select status from kunjungan where plat_nomor='"+plat_no+"' AND tanggal_parkir= TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND id_member='" + id_member + "'";
+        String sql = "select status from kunjungan where plat_nomor='" + plat_no + "' AND tanggal_parkir= TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND id_member='" + id_member + "'";
         try {
             ResultSet rset = stmt.executeQuery(sql);
             while (rset.next()) {
@@ -89,8 +92,8 @@ public class KeluarParkirControl {
         }
         conn.close();
     }
-    
-    public void kurangSaldoMember(Member member)throws SQLException{
+
+    public void kurangSaldoMember(Member member) throws SQLException {
         PreparedStatement pstmt = null;
         try {
             String sql = "update member set saldo = (select (saldo-2000) from member where id_member=?) where id_member=?";
@@ -105,14 +108,14 @@ public class KeluarParkirControl {
         }
         conn.close();
     }
-    
+
     public void tampilDataMemberKeluar(Kunjungan kunjungan) throws SQLException {
         Statement stmt = conn.createStatement();
         Member member = new Member();
         String id_member = kunjungan.getId_member().getId_member();
         String sql = "select m.id_member, m.nama_member, m.saldo, k.no_parkir, k.tanggal_parkir, k.jam_masuk, k.jam_keluar,k.plat_nomor "
                 + "from member m, kunjungan k "
-                + "where k.tanggal_parkir= TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND m.id_member = '"+id_member+"' AND k.id_member = '"+id_member+"'";
+                + "where k.tanggal_parkir= TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND m.id_member = '" + id_member + "' AND k.id_member = '" + id_member + "'";
         try {
             ResultSet rset = stmt.executeQuery(sql);
             while (rset.next()) {
@@ -130,6 +133,57 @@ public class KeluarParkirControl {
             System.out.println("Error = " + x.getMessage());
         }
         conn.commit();
-        conn.close(); 
+        conn.close();
+    }
+
+    public List<Kunjungan> tampilDataParkirKeluar() throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        Member mb = new Member();
+        Petugas pt = new Petugas();
+        try {
+//            conn.setAutoCommit(false);
+//            statement = conn.prepareStatement("select no_parkir, plat_nomor, id_petugas, id_member, jam_keluar, tanggal_parkir, status"
+//                    + "from kunjungan order by tanggal_parkir");
+
+//            statement = conn.prepareStatement("select no_parkir, plat_nomor, id_petugas, id_member, jam_keluar, tanggal_parkir, status"
+//                    + " from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'keluar' order by tanggal_parkir");
+            
+            statement=conn.prepareStatement("select * from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'keluar' order by tanggal_parkir");
+//            statement=conn.prepareStatement("select * from kunjungan where status = 'keluar' order by tanggal_parkir");
+            
+            result = statement.executeQuery();
+            List<Kunjungan> kategoris = new ArrayList<Kunjungan>();
+            while (result.next()) {
+                Kunjungan dataKunjunganKeluar = new Kunjungan();
+                dataKunjunganKeluar.setNo_parkir(result.getString("no_parkir"));
+                dataKunjunganKeluar.setPlat_nomor(result.getString("plat_nomor"));
+                pt.setId_petugas(result.getString("id_petugas"));
+                dataKunjunganKeluar.setId_petugas(pt);
+                mb.setId_member(result.getString("id_member"));
+                dataKunjunganKeluar.setId_member(mb);
+//                dataKunjunganKeluar.setJam_masuk(result.getString("jam_masuk"));
+                dataKunjunganKeluar.setJam_keluar(result.getString("jam_keluar"));
+                dataKunjunganKeluar.setTanggal_parkir(result.getString("tanggal_parkir"));
+                dataKunjunganKeluar.setStatus(result.getString("status"));
+                kategoris.add(dataKunjunganKeluar);
+            }
+            conn.commit();
+            return kategoris;
+        } catch (SQLException exception) {
+            throw exception;
+        } finally {
+            try {
+                conn.setAutoCommit(true);
+                if (result != null) {
+                    result.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException exception) {
+                throw exception;
+            }
+        }
     }
 }

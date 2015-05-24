@@ -6,6 +6,12 @@
 
 package com.view.in;
 
+import com.control.MasukParkir.DataMasukParkirTabelModel;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author rai
@@ -15,8 +21,9 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
     /**
      * Creates new form PetugasMainFrame
      */
-    public PetugasListMasukPengunjungFrame() {
+    public PetugasListMasukPengunjungFrame() throws SQLException {
         initComponents();
+        tampilListMasuk();
     }
 
     /**
@@ -105,7 +112,7 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
 
         jButtonCari.setText("Cari");
 
-        jComboBoxKategoriCari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "Id Petugas", "id Pengunjung2", "Tangga", "No Kendaraan", "Saldo", "Jam Masuk", "Jam Keluar" }));
+        jComboBoxKategoriCari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "Id Petugas", "Jam Masuk" }));
         jComboBoxKategoriCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxKategoriCariActionPerformed(evt);
@@ -170,6 +177,12 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
+    private void tampilListMasuk() throws SQLException{
+        List<com.model.Kunjungan> listMasuk=com.control.MasukParkir.MasukParkirControl.getKoneksiMasukParkir().tampilDataParkirMasuk();
+        DataMasukParkirTabelModel model=new DataMasukParkirTabelModel(listMasuk);
+        model.fireTableDataChanged();
+        jTablePengunjung.setModel(model);
+    }
     /**
      * @param args the command line arguments
      */
@@ -200,7 +213,11 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PetugasListMasukPengunjungFrame().setVisible(true);
+                try {
+                    new PetugasListMasukPengunjungFrame().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PetugasListMasukPengunjungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

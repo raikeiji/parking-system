@@ -3,16 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/rai/java/SistemParkirUSD/src/com/connection/Koneksi.java</file>
             <file>file:/home/rai/java/SistemParkirUSD/src/com/view/in/PetugasListMasukPengunjungFrame.java</file>
-            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/out/LoginPetugasKeluarFrame.java</file>
-            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/out/PetugasKeluarParkirFrame.java</file>
-            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/out/PetugasListKeluarPengunjungFrame.java</file>
-            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/LoginAdminFrame.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/admin/UpdateDeletePetugasForm.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/control/editmember/EditMemberControl.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/admin/DaftarMemberForm.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/control/KeluarParkir/TestKeluarParkirControl.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/admin/UpdateDeleteMemberForm.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/control/editmember/TestEditMember.java</file>
             <file>file:/home/rai/java/SistemParkirUSD/src/com/view/in/PetugasMasukParkirFrame.java</file>
-            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/in/LoginPetugasMasukFrame.java</file>
-            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/AdminMainFrame.java</file>
-            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/AdminListPengunjungFrame.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/LoginFrame.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/admin/AdminMainFrame.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/out/PetugasKeluarParkirFrame.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/control/MasukParkir/MasukParkirControl.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/view/admin/DaftarPetugasForm.java</file>
+            <file>file:/home/rai/java/SistemParkirUSD/src/com/control/MasukParkir/TestMasukParkirControl.java</file>
         </group>
     </open-files>
 </project-private>

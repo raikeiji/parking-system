@@ -6,7 +6,13 @@
 
 package com.view.out;
 
+import com.control.MasukParkir.DataMasukParkirTabelModel;
+import com.model.DataKeluarParkirTabelModel;
 import com.view.in.*;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,9 +22,12 @@ public class PetugasListKeluarPengunjungFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form PetugasMainFrame
+     *
+     * @throws java.sql.SQLException
      */
-    public PetugasListKeluarPengunjungFrame() {
+    public PetugasListKeluarPengunjungFrame() throws SQLException {
         initComponents();
+        tampilListKeluar();
     }
 
     /**
@@ -40,7 +49,7 @@ public class PetugasListKeluarPengunjungFrame extends javax.swing.JFrame {
         jComboBoxKategoriCari = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Form Utama Petugas");
+        setTitle("Form List Parkir Keluar");
 
         jPanelTabelPengunjung.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Form Table Pengunjung", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 2, 10))); // NOI18N
 
@@ -107,7 +116,7 @@ public class PetugasListKeluarPengunjungFrame extends javax.swing.JFrame {
 
         jButtonCari.setText("Cari");
 
-        jComboBoxKategoriCari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "Id Petugas", "id Pengunjung2", "Tangga", "No Kendaraan", "Saldo", "Jam Masuk", "Jam Keluar" }));
+        jComboBoxKategoriCari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "Id Petugas", "Jam Keluar" }));
         jComboBoxKategoriCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxKategoriCariActionPerformed(evt);
@@ -171,6 +180,16 @@ public class PetugasListKeluarPengunjungFrame extends javax.swing.JFrame {
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonCloseActionPerformed
+    
+    private void tampilListKeluar() throws SQLException {
+        List<com.model.Kunjungan> listKeluar = com.control.KeluarParkir.KeluarParkirControl.getKoneksiKeluarParkir().tampilDataParkirKeluar();
+//        DataMasukParkirTabelModel model=new DataMasukParkirTabelModel(listKeluar);
+//        model.fireTableDataChanged();
+//        jTablePengunjung.setModel(model);
+        DataKeluarParkirTabelModel model = new DataKeluarParkirTabelModel(listKeluar);
+        model.fireTableDataChanged();
+        jTablePengunjung.setModel(model);
+    }
 
     /**
      * @param args the command line arguments
@@ -202,7 +221,11 @@ public class PetugasListKeluarPengunjungFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PetugasListMasukPengunjungFrame().setVisible(true);
+                try {
+                    new PetugasListMasukPengunjungFrame().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PetugasListKeluarPengunjungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -231,6 +231,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     break;
             }
 
+            this.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

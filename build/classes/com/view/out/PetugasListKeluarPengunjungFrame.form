@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Form Utama Petugas"/>
+    <Property name="title" type="java.lang.String" value="Form List Parkir Keluar"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -203,15 +203,10 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxKategoriCari">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="8">
+              <StringArray count="3">
                 <StringItem index="0" value="Pilih Kategori--"/>
                 <StringItem index="1" value="Id Petugas"/>
-                <StringItem index="2" value="id Pengunjung2"/>
-                <StringItem index="3" value="Tangga"/>
-                <StringItem index="4" value="No Kendaraan"/>
-                <StringItem index="5" value="Saldo"/>
-                <StringItem index="6" value="Jam Masuk"/>
-                <StringItem index="7" value="Jam Keluar"/>
+                <StringItem index="2" value="Jam Keluar"/>
               </StringArray>
             </Property>
           </Properties>

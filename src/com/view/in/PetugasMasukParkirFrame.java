@@ -91,7 +91,7 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Frame  Parkir Masuk");
+        setTitle("Frame  List Parkir Masuk");
 
         jPanelPengunjung.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Form Entri Kendaraan Masuk", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 2, 10))); // NOI18N
 
