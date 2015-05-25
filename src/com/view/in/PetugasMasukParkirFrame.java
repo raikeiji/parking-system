@@ -78,8 +78,6 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         jLabelTanggalTampil = new javax.swing.JLabel();
         jLabelJamTampil = new javax.swing.JLabel();
         jButtonTutupPalang = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabelNamaPetugas = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemListPengunjung = new javax.swing.JMenuItem();
@@ -262,10 +260,6 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Nama Petugas :");
-
-        jLabelNamaPetugas.setText("Dion");
-
         jMenuFile.setText("File");
 
         jMenuItemListPengunjung.setText("List Pengunjung");
@@ -297,6 +291,11 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         jMenuHelp.setText("Help");
 
         jMenuItemTentang.setText("Tentang");
+        jMenuItemTentang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTentangActionPerformed(evt);
+            }
+        });
         jMenuHelp.add(jMenuItemTentang);
 
         jMenuBar1.add(jMenuHelp);
@@ -314,10 +313,6 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                     .addComponent(jPanelPengunjung, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jButtonLogout)
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelNamaPetugas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonBukaPalang, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -343,9 +338,7 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLogout)
                     .addComponent(jButtonBukaPalang)
-                    .addComponent(jButtonTutupPalang)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabelNamaPetugas))
+                    .addComponent(jButtonTutupPalang))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -361,8 +354,14 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNoIDActionPerformed
 
     private void jMenuItemListPengunjungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListPengunjungActionPerformed
-        PetugasListMasukPengunjungFrame p = new PetugasListMasukPengunjungFrame();
-        p.setVisible(true);
+        try {
+            //        PetugasListMasukPengunjungFrame p = new PetugasListMaseukPengunjungFrame();
+//        p.setVisible(true);
+            PetugasListMasukPengunjungFrame p=new PetugasListMasukPengunjungFrame();
+            p.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(PetugasMasukParkirFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItemListPengunjungActionPerformed
 
     private void jMenuItemCetakBarcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCetakBarcodeActionPerformed
@@ -441,6 +440,11 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         jLabelGambarPalang.setForeground(Color.GRAY);
         
     }//GEN-LAST:event_jButtonTutupPalangActionPerformed
+
+    private void jMenuItemTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTentangActionPerformed
+        com.view.AboutUS s=new com.view.AboutUS();
+        s.setVisible(true);
+    }//GEN-LAST:event_jMenuItemTentangActionPerformed
 
     public void tanggalTampil() {
 
@@ -560,13 +564,11 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelGambarPalang;
     private javax.swing.JLabel jLabelJamTampil;
-    private javax.swing.JLabel jLabelNamaPetugas;
     private javax.swing.JLabel jLabelTanggalTampil;
     private javax.swing.JLabel jLabelxx;
     private javax.swing.JLabel jLabelyy;

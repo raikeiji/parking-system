@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.control.MasukParkir;
+package com.model;
 
 import com.model.Kunjungan;
 import java.util.ArrayList;

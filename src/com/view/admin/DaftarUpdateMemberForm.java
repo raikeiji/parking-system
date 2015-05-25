@@ -5,10 +5,13 @@
  */
 package com.view.admin;
 
-import com.control.editmember.EditMemberControl;
+
+import com.control.admin.editmember.EditMemberControl;
 import com.model.Member;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -270,12 +273,12 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNamaMouseClicked
 
     private void jButtonSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimpanActionPerformed
-        Member mb = new Member();
-        mb.setId_member(jTextFieldNoID.getText());
-        mb.setNama_member(jTextFieldNama.getText());
-        mb.setAlamat(jTextAreaAlamat.getText());
-        mb.setSaldo(jTextFieldSaldo.getText());
         try {
+            Member mb = new Member();
+            mb.setId_member(jTextFieldNoID.getText());
+            mb.setNama_member(jTextFieldNama.getText());
+            mb.setAlamat(jTextAreaAlamat.getText());
+            mb.setSaldo(jTextFieldSaldo.getText());
             if (EditMemberControl.getKoneksiEditMember().cekDataMember(mb)) {
 //                System.out.println("Pendaftaran gagal, member sudah terdaftar");
 //                EditMemberControl.getKoneksiEditMember().updateDataMember(mb);
@@ -300,11 +303,10 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
 //                System.out.println("Hapus Data Member Gagal, data tidak ditemukan");
                 EditMemberControl.getKoneksiEditMember().pendaftaranMemberBaru(mb);
                 JOptionPane.showMessageDialog(rootPane, "Pendaftaran Berhasil");
-
+                
             }
-
         } catch (SQLException ex) {
-            System.out.println("Kueri gagal : " + ex.getMessage());
+            Logger.getLogger(DaftarUpdateMemberForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonSimpanActionPerformed
 

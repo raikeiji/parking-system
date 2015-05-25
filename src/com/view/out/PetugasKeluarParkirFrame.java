@@ -226,7 +226,6 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addComponent(jTextFieldHasilNoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextFieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
@@ -305,6 +304,11 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
         jMenuHelp.setText("Help");
 
         jMenuItemTentang.setText("Tentang");
+        jMenuItemTentang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTentangActionPerformed(evt);
+            }
+        });
         jMenuHelp.add(jMenuItemTentang);
 
         jMenuBar1.add(jMenuHelp);
@@ -363,9 +367,12 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNoIDActionPerformed
 
     private void jMenuItemListPengunjungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListPengunjungActionPerformed
-
-        PetugasListKeluarPengunjungFrame p=new PetugasListKeluarPengunjungFrame();
-        p.setVisible(true);
+        try {
+            PetugasListKeluarPengunjungFrame p=new PetugasListKeluarPengunjungFrame();
+            p.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(PetugasKeluarParkirFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jMenuItemListPengunjungActionPerformed
 
@@ -450,6 +457,11 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
         jLabelGambarPalang.setPreferredSize(jTextFieldNoID.getPreferredSize());
         jLabelGambarPalang.setForeground(Color.GRAY);
     }//GEN-LAST:event_jButtonTutupPalangActionPerformed
+
+    private void jMenuItemTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTentangActionPerformed
+        com.view.AboutUS s=new com.view.AboutUS();
+        s.setVisible(true);
+    }//GEN-LAST:event_jMenuItemTentangActionPerformed
 
     public void tanggalTampil() {
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

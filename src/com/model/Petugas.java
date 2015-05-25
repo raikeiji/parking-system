@@ -14,7 +14,8 @@ public class Petugas {
     private String id_petugas;
     private String nama_petugas;
     private String password;
-
+    private String status;
+    
     public String getId_petugas() {
         return id_petugas;
     }
@@ -37,6 +38,14 @@ public class Petugas {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
     

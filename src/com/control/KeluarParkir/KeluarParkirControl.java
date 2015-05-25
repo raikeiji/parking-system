@@ -186,4 +186,55 @@ public class KeluarParkirControl {
             }
         }
     }
+    
+    public List<Kunjungan> caritampilDataParkirKeluar(String key) throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        Member mb = new Member();
+        Petugas pt = new Petugas();
+        try {
+//            conn.setAutoCommit(false);
+//            statement = conn.prepareStatement("select no_parkir, plat_nomor, id_petugas, id_member, jam_keluar, tanggal_parkir, status"
+//                    + "from kunjungan order by tanggal_parkir");
+
+//            statement = conn.prepareStatement("select no_parkir, plat_nomor, id_petugas, id_member, jam_keluar, tanggal_parkir, status"
+//                    + " from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'keluar' order by tanggal_parkir");
+            
+            statement=conn.prepareStatement("select * from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'keluar' and id_member = '"+key+"' order by tanggal_parkir");
+//            statement=conn.prepareStatement("select * from kunjungan where status = 'keluar' order by tanggal_parkir");
+            
+            result = statement.executeQuery();
+            List<Kunjungan> kategoris = new ArrayList<Kunjungan>();
+            while (result.next()) {
+                Kunjungan dataKunjunganKeluar = new Kunjungan();
+                dataKunjunganKeluar.setNo_parkir(result.getString("no_parkir"));
+                dataKunjunganKeluar.setPlat_nomor(result.getString("plat_nomor"));
+                pt.setId_petugas(result.getString("id_petugas"));
+                dataKunjunganKeluar.setId_petugas(pt);
+                mb.setId_member(result.getString("id_member"));
+                dataKunjunganKeluar.setId_member(mb);
+//                dataKunjunganKeluar.setJam_masuk(result.getString("jam_masuk"));
+                dataKunjunganKeluar.setJam_keluar(result.getString("jam_keluar"));
+                dataKunjunganKeluar.setTanggal_parkir(result.getString("tanggal_parkir"));
+                dataKunjunganKeluar.setStatus(result.getString("status"));
+                kategoris.add(dataKunjunganKeluar);
+            }
+            conn.commit();
+            return kategoris;
+        } catch (SQLException exception) {
+            throw exception;
+        } finally {
+            try {
+                conn.setAutoCommit(true);
+                if (result != null) {
+                    result.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException exception) {
+                throw exception;
+            }
+        }
+    }
 }

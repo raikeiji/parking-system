@@ -5,8 +5,10 @@
  */
 package com.view.admin;
 
+import com.control.admin.AdminControl;
 import com.model.DataMemberTableModel;
 import com.model.DataPetugasTableModel;
+import com.model.Member;
 import com.model.Petugas;
 import com.view.CetakBarCodeFrame;
 import com.view.LoginFrame;
@@ -22,6 +24,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
+
 
 /**
  *
@@ -151,6 +154,11 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         });
 
         jButtonCariMember.setText("Cari");
+        jButtonCariMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCariMemberActionPerformed(evt);
+            }
+        });
 
         jTextFieldCariPetugas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -159,6 +167,11 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         });
 
         jButtonCariPetugas.setText("Cari");
+        jButtonCariPetugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCariPetugasActionPerformed(evt);
+            }
+        });
 
         jButtonKeluar.setText("Keluar");
         jButtonKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +251,11 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         jMenuHelp.setText("Help");
 
         jMenuItemTentang.setText("Tentang");
+        jMenuItemTentang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTentangActionPerformed(evt);
+            }
+        });
         jMenuHelp.add(jMenuItemTentang);
 
         jMenuBar1.add(jMenuHelp);
@@ -366,6 +384,43 @@ public final class AdminMainFrame extends javax.swing.JFrame {
     private void jTextFieldCariPetugasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldCariPetugasMouseClicked
         jTextFieldCariPetugas.setText("");
     }//GEN-LAST:event_jTextFieldCariPetugasMouseClicked
+
+    private void jButtonCariMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCariMemberActionPerformed
+        String key=jTextFieldCariMember.getText();
+         try {
+            List<Member> listKategori = AdminControl.getKoneksiAdminControl().caritampilDataMember(key);
+            DataMemberTableModel model = new DataMemberTableModel(listKategori);
+            model.fireTableDataChanged();
+            jTableDataMember.setModel(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonCariMemberActionPerformed
+
+    private void jButtonCariPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCariPetugasActionPerformed
+        try {
+            String key=jTextFieldCariPetugas.getText();
+            try {
+                List<Petugas> listKategori = AdminControl.getKoneksiAdminControl().caritampilDataPetugas(key);
+                DataPetugasTableModel model = new DataPetugasTableModel(listKategori);
+                model.fireTableDataChanged();
+                jTableDataPetugasAktif.setModel(model);
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (jTextFieldCariMember.getText().equals("")) {
+                DataMemberAktif();
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonCariPetugasActionPerformed
+
+    private void jMenuItemTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTentangActionPerformed
+        com.view.AboutUS s=new com.view.AboutUS();
+        s.setVisible(true);
+    }//GEN-LAST:event_jMenuItemTentangActionPerformed
 
     public void tanggalTampil() {
 

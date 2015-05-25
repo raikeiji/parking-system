@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.view.admin;
+
+import com.control.admin.editpetugas.EditPetugasControl;
+import com.model.Petugas;
+import java.awt.Color;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +22,7 @@ public class DaftarUpdatePetugasForm extends javax.swing.JFrame {
      */
     public DaftarUpdatePetugasForm() {
         initComponents();
+        tampilanawal();
     }
 
     /**
@@ -44,6 +50,7 @@ public class DaftarUpdatePetugasForm extends javax.swing.JFrame {
         jComboBoxStatus = new javax.swing.JComboBox();
         jButtonSimpan = new javax.swing.JButton();
         jButtonBatal = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Pendaftaran Member");
@@ -116,6 +123,12 @@ public class DaftarUpdatePetugasForm extends javax.swing.JFrame {
 
         jLabel3.setText("Status");
 
+        jTextFieldPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldPasswordMouseClicked(evt);
+            }
+        });
+
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih status--", "penjagain", "penjagaout", "admin" }));
 
         javax.swing.GroupLayout jPanelPengunjungLayout = new javax.swing.GroupLayout(jPanelPengunjung);
@@ -162,8 +175,25 @@ public class DaftarUpdatePetugasForm extends javax.swing.JFrame {
         );
 
         jButtonSimpan.setText("Simpan");
+        jButtonSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSimpanActionPerformed(evt);
+            }
+        });
 
         jButtonBatal.setText("Batal");
+        jButtonBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBatalActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Keluar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,7 +205,8 @@ public class DaftarUpdatePetugasForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelPengunjung, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonSimpan)))
@@ -187,11 +218,17 @@ public class DaftarUpdatePetugasForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelPengunjung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonBatal)
-                    .addComponent(jButtonSimpan))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonBatal)
+                            .addComponent(jButtonSimpan))
+                        .addContainerGap(24, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addContainerGap())))
         );
 
         pack();
@@ -208,6 +245,79 @@ public class DaftarUpdatePetugasForm extends javax.swing.JFrame {
     private void jTextFieldNamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNamaMouseClicked
         jTextFieldNama.setText("");
     }//GEN-LAST:event_jTextFieldNamaMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatalActionPerformed
+        tampilanawal();
+    }//GEN-LAST:event_jButtonBatalActionPerformed
+
+    private void jButtonSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimpanActionPerformed
+//        Member mb = new Member();
+//        mb.setId_member(jTextFieldNoID.getText());
+//        mb.setNama_member(jTextFieldNama.getText());
+//        mb.setAlamat(jTextAreaAlamat.getText());
+//        mb.setSaldo(jTextFieldSaldo.getText());
+        Petugas pt = new Petugas();
+        pt.setId_petugas(jTextFieldNoID.getText());
+        pt.setNama_petugas(jTextFieldNama.getText());
+        pt.setPassword(jTextFieldPassword.getText());
+        pt.setStatus((String) jComboBoxStatus.getSelectedItem());
+        try {
+            if (EditPetugasControl.getKoneksiEditPetugas().cekDataPetugas(pt)) {
+//                System.out.println("Pendaftaran gagal, member sudah terdaftar");
+//                EditMemberControl.getKoneksiEditMember().updateDataMember(mb);
+//                System.out.println("Update Data Berhasil");
+//                EditMemberControl.getKoneksiEditMember().hapusDataMember(mb);
+//                System.out.println("Hapus Data Member Berhasil");
+
+//                JOptionPane.showMessageDialog(rootPane, "Pendaftaran gagal, member sudah terdaftar");
+                int selectedOption = JOptionPane.showConfirmDialog(null,
+                        "Pendaftaran gagal, petugas sudah terdaftar, apakah anda ingin mengupdate?",
+                        "Update",
+                        JOptionPane.YES_NO_OPTION);
+                if (selectedOption == JOptionPane.YES_OPTION) {
+//                    EditMemberControl.getKoneksiEditMember().updateDataMember(mb);
+//                    JOptionPane.showMessageDialog(rootPane, "Update Data Berhasil");
+//                    tampilanawal();
+                    EditPetugasControl.getKoneksiEditPetugas().updateDataPetugas(pt);
+                    JOptionPane.showMessageDialog(rootPane, "Update Data Berhasil");
+                    tampilanawal();
+                }
+            } else {
+//                EditMemberControl.getKoneksiEditMember().pendaftaranMemberBaru(mb);
+//                System.out.println("Pendaftaran Berhasil");
+//                System.out.println("Update Data Gagal, member belum terdaftar");
+//                System.out.println("Hapus Data Member Gagal, data tidak ditemukan");
+//                EditMemberControl.getKoneksiEditMember().pendaftaranMemberBaru(mb);
+//                JOptionPane.showMessageDialog(rootPane, "Pendaftaran Berhasil");
+                EditPetugasControl.getKoneksiEditPetugas().pendaftaranPetugasBaru(pt);
+                JOptionPane.showMessageDialog(rootPane, "Pendaftaran Berhasil");
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Kueri gagal : " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonSimpanActionPerformed
+
+    private void jTextFieldPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPasswordMouseClicked
+        jTextFieldPassword.setText("");
+    }//GEN-LAST:event_jTextFieldPasswordMouseClicked
+
+    private void tampilanawal() {
+        jTextFieldNoID.setText("Input Nomor ID");
+        jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());
+        jTextFieldNoID.setForeground(Color.GRAY);
+        jTextFieldNama.setText("Input nama");
+        jTextFieldNama.setPreferredSize(jTextFieldNama.getPreferredSize());
+        jTextFieldNama.setForeground(Color.GRAY);
+        jTextFieldPassword.setText("Input password");
+        jTextFieldPassword.setPreferredSize(jTextFieldNama.getPreferredSize());
+        jTextFieldPassword.setForeground(Color.GRAY);
+        jComboBoxStatus.setSelectedIndex(0);
+    }
 
     /**
      * @param args the command line arguments
@@ -245,6 +355,7 @@ public class DaftarUpdatePetugasForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonBatal;
     private javax.swing.JButton jButtonSimpan;
     private javax.swing.JComboBox jComboBoxStatus;

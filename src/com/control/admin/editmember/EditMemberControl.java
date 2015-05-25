@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.control.editmember;
+package com.control.admin.editmember;
 
 
 import com.connection.Koneksi;
@@ -120,9 +120,35 @@ public class EditMemberControl {
 //                kunjungan.setTanggal_parkir(rset.getString("tanggal_parkir"));
 //                kunjungan.setJam_masuk(rset.getString("jam_masuk"));
 //                kunjungan.setPlat_nomor(rset.getString("plat_nomor"));
-                mem.setId_member(rset.getString(2));
+                mem.setNama_member(rset.getString(2));
                 mem.setAlamat(rset.getString(3));
                 mem.setSaldo(rset.getString(4));
+            }
+        } catch (SQLException x) {
+            System.out.println("Error = " + x.getMessage());
+        }
+        conn.commit();
+        conn.close();
+    }
+
+    public void tampilDataMemberMasuk(Kunjungan kunjungan) throws SQLException {
+        Statement stmt = conn.createStatement();
+        Member member = new Member();
+        String id_member = kunjungan.getId_member().getId_member();
+        String sql = "select m.id_member, m.nama_member, m.saldo, k.no_parkir, k.tanggal_parkir, k.jam_masuk, k.plat_nomor "
+                + "from member m, kunjungan k "
+                + "where k.tanggal_parkir= TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND m.id_member = '" + id_member + "' AND k.id_member = '" + id_member + "'";
+        try {
+            ResultSet rset = stmt.executeQuery(sql);
+            while (rset.next()) {
+                member.setId_member(rset.getString("id_member"));
+                member.setNama_member(rset.getString("nama_member"));
+                member.setSaldo(rset.getString("saldo"));
+                kunjungan.setId_member(member);
+                kunjungan.setNo_parkir(rset.getString("no_parkir"));
+                kunjungan.setTanggal_parkir(rset.getString("tanggal_parkir"));
+                kunjungan.setJam_masuk(rset.getString("jam_masuk"));
+                kunjungan.setPlat_nomor(rset.getString("plat_nomor"));
             }
         } catch (SQLException x) {
             System.out.println("Error = " + x.getMessage());

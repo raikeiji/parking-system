@@ -6,6 +6,16 @@
 
 package com.view.admin;
 
+import com.control.admin.editmember.EditMemberControl;
+import com.control.admin.editpetugas.EditPetugasControl;
+import com.model.Member;
+import com.model.Petugas;
+import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author rai
@@ -17,6 +27,7 @@ public class DeletePetugasForm extends javax.swing.JFrame {
      */
     public DeletePetugasForm() {
         initComponents();
+        tampilanawal();
     }
 
     /**
@@ -41,9 +52,10 @@ public class DeletePetugasForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldPassword = new javax.swing.JTextField();
-        jComboBoxStatus = new javax.swing.JComboBox();
+        jTextFieldStatus = new javax.swing.JTextField();
         jButtonDelete = new javax.swing.JButton();
         jButtonBatal = new javax.swing.JButton();
+        jButtonKeluar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Pendaftaran Member");
@@ -116,8 +128,6 @@ public class DeletePetugasForm extends javax.swing.JFrame {
 
         jLabel3.setText("Status");
 
-        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih status--", "penjagain", "penjagaout", "admin" }));
-
         javax.swing.GroupLayout jPanelPengunjungLayout = new javax.swing.GroupLayout(jPanelPengunjung);
         jPanelPengunjung.setLayout(jPanelPengunjungLayout);
         jPanelPengunjungLayout.setHorizontalGroup(
@@ -126,7 +136,7 @@ public class DeletePetugasForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPengunjungLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 169, Short.MAX_VALUE)
                         .addComponent(jLabelxx)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldNoID, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,9 +153,9 @@ public class DeletePetugasForm extends javax.swing.JFrame {
                                 .addComponent(jTextFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(77, 77, 77)
                         .addComponent(jLabel3)
-                        .addGap(31, 31, 31)
-                        .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(46, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelPengunjungLayout.setVerticalGroup(
             jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +169,7 @@ public class DeletePetugasForm extends javax.swing.JFrame {
                     .addComponent(jTextFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelyy)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -168,8 +178,25 @@ public class DeletePetugasForm extends javax.swing.JFrame {
         );
 
         jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
 
         jButtonBatal.setText("Batal");
+        jButtonBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBatalActionPerformed(evt);
+            }
+        });
+
+        jButtonKeluar.setText("Keluar");
+        jButtonKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonKeluarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,7 +208,8 @@ public class DeletePetugasForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelPengunjung, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonKeluar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonDelete)))
@@ -196,7 +224,8 @@ public class DeletePetugasForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonBatal)
-                    .addComponent(jButtonDelete))
+                    .addComponent(jButtonDelete)
+                    .addComponent(jButtonKeluar))
                 .addContainerGap())
         );
 
@@ -209,12 +238,54 @@ public class DeletePetugasForm extends javax.swing.JFrame {
 
     private void jTextFieldNoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNoIDActionPerformed
 
+         try {
+            Petugas mb = new Petugas();
+            mb.setId_petugas(jTextFieldNoID.getText());
+//            EditMemberControl.getKoneksiEditMember().tampilDataMemberMasuk(mb);
+            EditPetugasControl.getKoneksiEditPetugas().tampilDataPetugasMasuk(mb);
+            jTextFieldNama.setText(mb.getNama_petugas());
+            jTextFieldPassword.setText(mb.getPassword());
+            jTextFieldStatus.setText(mb.getStatus());
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteMemberForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTextFieldNoIDActionPerformed
 
     private void jTextFieldNamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNamaMouseClicked
         jTextFieldNama.setText("");
     }//GEN-LAST:event_jTextFieldNamaMouseClicked
 
+    private void jButtonKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKeluarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonKeluarActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        try {
+            Petugas mb = new Petugas();
+            mb.setId_petugas(jTextFieldNoID.getText());
+//            mb.setNama_member(jTextFieldNamaNama.getText());
+//            mb.setAlamat(jTextAreaAlamat.getText());
+//            mb.setSaldo(jTextFieldSaldo.getText());
+            EditPetugasControl.getKoneksiEditPetugas().hapusDataPetugas(mb);
+            JOptionPane.showMessageDialog(rootPane, "Data telah dihapus");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Data digunakan pada table lain");
+            Logger.getLogger(DeleteMemberForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void jButtonBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatalActionPerformed
+        tampilanawal();
+    }//GEN-LAST:event_jButtonBatalActionPerformed
+
+     private void tampilanawal(){
+        jTextFieldNoID.setText("Input dan enter");
+        jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());
+        jTextFieldNoID.setForeground(Color.GRAY);
+        jTextFieldNama.setText("");
+        jTextFieldPassword.setText("");
+        jTextFieldStatus.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -253,7 +324,7 @@ public class DeletePetugasForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBatal;
     private javax.swing.JButton jButtonDelete;
-    private javax.swing.JComboBox jComboBoxStatus;
+    private javax.swing.JButton jButtonKeluar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -267,5 +338,6 @@ public class DeletePetugasForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNama;
     private javax.swing.JTextField jTextFieldNoID;
     private javax.swing.JTextField jTextFieldPassword;
+    private javax.swing.JTextField jTextFieldStatus;
     // End of variables declaration//GEN-END:variables
 }

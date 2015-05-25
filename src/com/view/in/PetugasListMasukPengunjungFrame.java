@@ -6,7 +6,9 @@
 
 package com.view.in;
 
-import com.control.MasukParkir.DataMasukParkirTabelModel;
+import com.control.MasukParkir.MasukParkirControl;
+import com.model.DataMasukParkirTabelModel;
+import com.model.Kunjungan;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -42,7 +44,6 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
         jButtonClose = new javax.swing.JButton();
         jButtonCari = new javax.swing.JButton();
         jTextFieldCari = new javax.swing.JTextField();
-        jComboBoxKategoriCari = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Utama Petugas");
@@ -111,11 +112,9 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
         });
 
         jButtonCari.setText("Cari");
-
-        jComboBoxKategoriCari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Kategori--", "Id Petugas", "Jam Masuk" }));
-        jComboBoxKategoriCari.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxKategoriCariActionPerformed(evt);
+                jButtonCariActionPerformed(evt);
             }
         });
 
@@ -124,9 +123,7 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
         jPanelTombolLayout.setHorizontalGroup(
             jPanelTombolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTombolLayout.createSequentialGroup()
-                .addComponent(jComboBoxKategoriCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCari, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -140,8 +137,7 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
                 .addGroup(jPanelTombolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClose)
                     .addComponent(jButtonCari)
-                    .addComponent(jTextFieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxKategoriCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -169,13 +165,22 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxKategoriCariActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxKategoriCariActionPerformed
-
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonCloseActionPerformed
+
+    private void jButtonCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCariActionPerformed
+        try {
+            String key=jTextFieldCari.getText();
+            
+            List<Kunjungan> list=MasukParkirControl.getKoneksiMasukParkir().caritampilDataParkirMasuk(key);
+            DataMasukParkirTabelModel model=new DataMasukParkirTabelModel(list);
+            model.fireTableDataChanged();
+            jTablePengunjung.setModel(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(PetugasListMasukPengunjungFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonCariActionPerformed
 
     private void tampilListMasuk() throws SQLException{
         List<com.model.Kunjungan> listMasuk=com.control.MasukParkir.MasukParkirControl.getKoneksiMasukParkir().tampilDataParkirMasuk();
@@ -225,7 +230,6 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCari;
     private javax.swing.JButton jButtonClose;
-    private javax.swing.JComboBox jComboBoxKategoriCari;
     private javax.swing.JPanel jPanelTabelPengunjung;
     private javax.swing.JPanel jPanelTombol;
     private javax.swing.JScrollPane jScrollPane1;

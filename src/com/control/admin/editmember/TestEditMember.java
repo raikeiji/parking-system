@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.control.editmember;
+package com.control.admin.editmember;
 
+import com.control.admin.editmember.EditMemberControl;
 import com.model.Member;
 import java.sql.SQLException;
 import java.util.logging.Level;

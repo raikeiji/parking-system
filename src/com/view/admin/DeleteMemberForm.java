@@ -6,9 +6,12 @@
 
 package com.view.admin;
 
-import com.control.editmember.EditMemberControl;
+import com.control.admin.editmember.EditMemberControl;
 import com.model.Member;
+import java.awt.Color;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +25,7 @@ public class DeleteMemberForm extends javax.swing.JFrame {
      */
     public DeleteMemberForm() {
         initComponents();
+        tampilanawal();
     }
 
     /**
@@ -42,14 +46,15 @@ public class DeleteMemberForm extends javax.swing.JFrame {
         jLabelyy = new javax.swing.JLabel();
         jLabelxx = new javax.swing.JLabel();
         jTextFieldNoID = new javax.swing.JTextField();
-        jTextFieldNama = new javax.swing.JTextField();
+        jTextFieldNamaNama = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldSaldo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaAlamat = new javax.swing.JTextArea();
-        jButtonSimpan = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
         jButtonBatal = new javax.swing.JButton();
+        jButtonKeluar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Pendaftaran Member");
@@ -111,10 +116,15 @@ public class DeleteMemberForm extends javax.swing.JFrame {
                 jTextFieldNoIDActionPerformed(evt);
             }
         });
+        jTextFieldNoID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldNoIDKeyTyped(evt);
+            }
+        });
 
-        jTextFieldNama.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTextFieldNamaNama.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldNamaMouseClicked(evt);
+                jTextFieldNamaNamaMouseClicked(evt);
             }
         });
 
@@ -138,7 +148,7 @@ public class DeleteMemberForm extends javax.swing.JFrame {
                             .addGroup(jPanelPengunjungLayout.createSequentialGroup()
                                 .addComponent(jLabelyy)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldNamaNama, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelPengunjungLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -165,7 +175,7 @@ public class DeleteMemberForm extends javax.swing.JFrame {
                 .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelPengunjungLayout.createSequentialGroup()
                         .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNamaNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelyy)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -176,14 +186,26 @@ public class DeleteMemberForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButtonSimpan.setText("Simpan");
-        jButtonSimpan.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSimpanActionPerformed(evt);
+                jButtonDeleteActionPerformed(evt);
             }
         });
 
         jButtonBatal.setText("Batal");
+        jButtonBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBatalActionPerformed(evt);
+            }
+        });
+
+        jButtonKeluar.setText("Keluar");
+        jButtonKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonKeluarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,10 +217,11 @@ public class DeleteMemberForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelPengunjung, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonKeluar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonSimpan)))
+                        .addComponent(jButtonDelete)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -208,10 +231,15 @@ public class DeleteMemberForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelPengunjung, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonBatal)
-                    .addComponent(jButtonSimpan))
-                .addGap(21, 21, 21))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonBatal)
+                            .addComponent(jButtonDelete))
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonKeluar)
+                        .addContainerGap())))
         );
 
         pack();
@@ -222,39 +250,57 @@ public class DeleteMemberForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNoIDMouseClicked
 
     private void jTextFieldNoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNoIDActionPerformed
-
+        try {
+            Member mb = new Member();
+            mb.setId_member(jTextFieldNoID.getText());
+            EditMemberControl.getKoneksiEditMember().tampilDataMemberMasuk(mb);
+            jTextFieldSaldo.setText(mb.getSaldo());
+            jTextFieldNamaNama.setText(mb.getNama_member());
+            jTextAreaAlamat.setText(mb.getAlamat());
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteMemberForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTextFieldNoIDActionPerformed
 
-    private void jTextFieldNamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNamaMouseClicked
-        jTextFieldNama.setText("");
-    }//GEN-LAST:event_jTextFieldNamaMouseClicked
+    private void jTextFieldNamaNamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNamaNamaMouseClicked
+        jTextFieldNamaNama.setText("");
+    }//GEN-LAST:event_jTextFieldNamaNamaMouseClicked
 
-    private void jButtonSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimpanActionPerformed
-        Member mb = new Member();
-        mb.setId_member(jTextFieldNoID.getText());
-        mb.setNama_member(jTextFieldNama.getText());
-        mb.setAlamat(jTextAreaAlamat.getText());
-        mb.setSaldo(jTextFieldSaldo.getText());
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         try {
-            if (EditMemberControl.getKoneksiEditMember().cekDataMember(mb)) {
-//                System.out.println("Pendaftaran gagal, member sudah terdaftar");
-//                EditMemberControl.getKoneksiEditMember().updateDataMember(mb);
-//                System.out.println("Update Data Berhasil");
-//                EditMemberControl.getKoneksiEditMember().hapusDataMember(mb);
-//                System.out.println("Hapus Data Member Berhasil");
-                JOptionPane.showMessageDialog(rootPane, "Data telah ");
-            } else {
-//                EditMemberControl.getKoneksiEditMember().pendaftaranMemberBaru(mb);
-//                System.out.println("Pendaftaran Berhasil");
-//                System.out.println("Update Data Gagal, member belum terdaftar");
-//                System.out.println("Hapus Data Member Gagal, data tidak ditemukan");
-            }
-
+            Member mb = new Member();
+            mb.setId_member(jTextFieldNoID.getText());
+//            mb.setNama_member(jTextFieldNamaNama.getText());
+//            mb.setAlamat(jTextAreaAlamat.getText());
+//            mb.setSaldo(jTextFieldSaldo.getText());
+            EditMemberControl.getKoneksiEditMember().hapusDataMember(mb);
+            JOptionPane.showMessageDialog(rootPane, "Data telah dihapus");
         } catch (SQLException ex) {
-            System.out.println("Kueri gagal : " + ex.getMessage());
+            JOptionPane.showMessageDialog(rootPane, "Data digunakan pada table lain");
+            Logger.getLogger(DeleteMemberForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButtonSimpanActionPerformed
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
 
+    private void jButtonKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKeluarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonKeluarActionPerformed
+
+    private void jTextFieldNoIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNoIDKeyTyped
+        
+    }//GEN-LAST:event_jTextFieldNoIDKeyTyped
+
+    private void jButtonBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatalActionPerformed
+        tampilanawal();
+    }//GEN-LAST:event_jButtonBatalActionPerformed
+
+    private void tampilanawal(){
+        jTextFieldNoID.setText("Input dan enter");
+        jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());
+        jTextFieldNoID.setForeground(Color.GRAY);
+        jTextFieldNamaNama.setText("");
+        jTextFieldSaldo.setText("");
+        jTextAreaAlamat.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -292,7 +338,8 @@ public class DeleteMemberForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBatal;
-    private javax.swing.JButton jButtonSimpan;
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonKeluar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -305,7 +352,7 @@ public class DeleteMemberForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelPengunjung;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaAlamat;
-    private javax.swing.JTextField jTextFieldNama;
+    private javax.swing.JTextField jTextFieldNamaNama;
     private javax.swing.JTextField jTextFieldNoID;
     private javax.swing.JTextField jTextFieldSaldo;
     // End of variables declaration//GEN-END:variables

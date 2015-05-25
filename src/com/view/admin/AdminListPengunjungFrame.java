@@ -6,6 +6,7 @@
 
 package com.view.admin;
 
+import com.control.admin.AdminControl;
 import com.model.DataListParkirTabelforAdmin;
 import com.model.Kunjungan;
 import java.sql.SQLException;
@@ -104,6 +105,11 @@ public class AdminListPengunjungFrame extends javax.swing.JFrame {
         });
 
         jButtonCari.setText("Cari");
+        jButtonCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCariActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelTombolLayout = new javax.swing.GroupLayout(jPanelTombol);
         jPanelTombol.setLayout(jPanelTombolLayout);
@@ -155,6 +161,20 @@ public class AdminListPengunjungFrame extends javax.swing.JFrame {
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonCloseActionPerformed
+
+    private void jButtonCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCariActionPerformed
+        try {
+            String key = jTextFieldCari.getText();
+            
+            List<Kunjungan> listKategori = AdminControl.getKoneksiAdminControl().CaridariLIST(key);
+            DataListParkirTabelforAdmin model = new DataListParkirTabelforAdmin(listKategori);
+            model.fireTableDataChanged();
+            jTablePengunjung.setModel(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminListPengunjungFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButtonCariActionPerformed
 
     private void listParkir() throws SQLException {
         List<Kunjungan> listParkir=com.control.admin.AdminControl.getKoneksiAdminControl().tampilListDataParkir();
