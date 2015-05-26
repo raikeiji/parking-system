@@ -132,6 +132,7 @@ public class AdminControl {
 //                mb.setSaldo(result.getString("saldo"));
 //                dkp.setJam_masuk(result.getString("jam_masuk"));
 //                dkp.setJam_keluar(result.getString("jam_keluar"));
+                mb=new Member();
                 pt.setId_petugas(result.getString(1));
                 mb.setId_member(result.getString(2));
 
@@ -249,7 +250,7 @@ public class AdminControl {
         ResultSet result = null;
         try {
 //            conn.setAutoCommit(false);
-            statement = conn.prepareStatement("select * from petugas where id_petugas LIKE '"+key+"'% order by id_petugas");
+            statement = conn.prepareStatement("select * from petugas where id_petugas = '"+key+"' order by id_petugas");
             result = statement.executeQuery();
             List<Petugas> kategoris = new ArrayList<Petugas>();
             while (result.next()) {

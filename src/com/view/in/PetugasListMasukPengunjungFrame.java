@@ -10,6 +10,7 @@ import com.control.MasukParkir.MasukParkirControl;
 import com.model.DataMasukParkirTabelModel;
 import com.model.Kunjungan;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -184,6 +185,11 @@ public class PetugasListMasukPengunjungFrame extends javax.swing.JFrame {
 
     private void tampilListMasuk() throws SQLException{
         List<com.model.Kunjungan> listMasuk=com.control.MasukParkir.MasukParkirControl.getKoneksiMasukParkir().tampilDataParkirMasuk();
+//        Iterator<Kunjungan> iterator = listMasuk.iterator();
+//        while (iterator.hasNext()) {
+//            Kunjungan kunjungan = iterator.next();
+//            System.out.println(" --- "+kunjungan.getId_member().getId_member());
+//        }
         DataMasukParkirTabelModel model=new DataMasukParkirTabelModel(listMasuk);
         model.fireTableDataChanged();
         jTablePengunjung.setModel(model);

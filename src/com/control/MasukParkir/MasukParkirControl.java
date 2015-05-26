@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -197,25 +198,37 @@ public class MasukParkirControl {
         ResultSet result = null;
         Member mb = new Member();
         Petugas pt = new Petugas();
+        List<Kunjungan> kategoris = new ArrayList<Kunjungan>();
         try {
 //            conn.setAutoCommit(false);
             statement = conn.prepareStatement("select * from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'masuk' order by tanggal_parkir");
             result = statement.executeQuery();
-            List<Kunjungan> kategoris = new ArrayList<Kunjungan>();
+            
             while (result.next()) {
                 Kunjungan dataKunjunganMasuk = new Kunjungan();
+                mb = new Member();
+                pt=new Petugas();
                 dataKunjunganMasuk.setNo_parkir(result.getString("no_parkir"));
                 dataKunjunganMasuk.setPlat_nomor(result.getString("plat_nomor"));
                 pt.setId_petugas(result.getString("id_petugas"));
                 dataKunjunganMasuk.setId_petugas(pt);
                 mb.setId_member(result.getString("id_member"));
+
                 dataKunjunganMasuk.setId_member(mb);
+//                
                 dataKunjunganMasuk.setJam_masuk(result.getString("jam_masuk"));
                 dataKunjunganMasuk.setTanggal_parkir(result.getString("tanggal_parkir"));
                 dataKunjunganMasuk.setStatus(result.getString("status"));
+
+                // bug here -> setelah masuk list, dataKunjunganMasuk.getId_Member().getId_Member() berubah menjadi 002, padahal sebelum masuk list tidak ya
                 kategoris.add(dataKunjunganMasuk);
             }
             conn.commit();
+//            Iterator<Kunjungan> iterator = kategoris.iterator();
+//            while (iterator.hasNext()) {
+//                Kunjungan kunjungan = iterator.next();
+//                System.out.println(" --- " + kunjungan.getId_member().getId_member());
+//            }
             return kategoris;
         } catch (SQLException exception) {
             throw exception;
@@ -234,7 +247,7 @@ public class MasukParkirControl {
         }
 
     }
-    
+
     public List<Kunjungan> caritampilDataParkirMasuk(String key) throws SQLException {
         PreparedStatement statement = null;
         ResultSet result = null;
@@ -242,7 +255,7 @@ public class MasukParkirControl {
         Petugas pt = new Petugas();
         try {
 //            conn.setAutoCommit(false);
-            statement = conn.prepareStatement("select * from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'masuk' AND id_member= '"+key+"' order by tanggal_parkir");
+            statement = conn.prepareStatement("select * from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'masuk' AND id_member= '" + key + "' order by tanggal_parkir");
             result = statement.executeQuery();
             List<Kunjungan> kategoris = new ArrayList<Kunjungan>();
             while (result.next()) {

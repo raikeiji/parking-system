@@ -149,23 +149,29 @@ public class KeluarParkirControl {
 //            statement = conn.prepareStatement("select no_parkir, plat_nomor, id_petugas, id_member, jam_keluar, tanggal_parkir, status"
 //                    + " from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'keluar' order by tanggal_parkir");
             
-            statement=conn.prepareStatement("select * from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'keluar' order by tanggal_parkir");
+//            statement=conn.prepareStatement("select * from kunjungan where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'keluar' order by tanggal_parkir");
+            statement=conn.prepareStatement("select k.NO_PARKIR, k.PLAT_NOMOR, k.ID_PETUGAS, m.ID_MEMBER, k.JAM_KELUAR, k.TANGGAL_PARKIR, k.STATUS from kunjungan k, member m where tanggal_parkir = TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND status = 'keluar' AND k.ID_MEMBER=m.ID_MEMBER order by k.tanggal_parkir");
 //            statement=conn.prepareStatement("select * from kunjungan where status = 'keluar' order by tanggal_parkir");
             
             result = statement.executeQuery();
             List<Kunjungan> kategoris = new ArrayList<Kunjungan>();
             while (result.next()) {
                 Kunjungan dataKunjunganKeluar = new Kunjungan();
-                dataKunjunganKeluar.setNo_parkir(result.getString("no_parkir"));
-                dataKunjunganKeluar.setPlat_nomor(result.getString("plat_nomor"));
-                pt.setId_petugas(result.getString("id_petugas"));
+                mb=new Member();
+                pt=new Petugas();
+                dataKunjunganKeluar.setNo_parkir(result.getString(1));
+                dataKunjunganKeluar.setPlat_nomor(result.getString(2));
+                
+                pt.setId_petugas(result.getString(3));
+                
                 dataKunjunganKeluar.setId_petugas(pt);
-                mb.setId_member(result.getString("id_member"));
+                
+                mb.setId_member(result.getString(4));
                 dataKunjunganKeluar.setId_member(mb);
 //                dataKunjunganKeluar.setJam_masuk(result.getString("jam_masuk"));
-                dataKunjunganKeluar.setJam_keluar(result.getString("jam_keluar"));
-                dataKunjunganKeluar.setTanggal_parkir(result.getString("tanggal_parkir"));
-                dataKunjunganKeluar.setStatus(result.getString("status"));
+                dataKunjunganKeluar.setJam_keluar(result.getString(5));
+                dataKunjunganKeluar.setTanggal_parkir(result.getString(6));
+                dataKunjunganKeluar.setStatus(result.getString(7));
                 kategoris.add(dataKunjunganKeluar);
             }
             conn.commit();

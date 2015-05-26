@@ -6,6 +6,7 @@
 package com.view.in;
 
 import com.control.MasukParkir.MasukParkirControl;
+import com.control.OnlinePegawaiPool;
 import com.model.Kunjungan;
 import com.model.Member;
 import com.model.Petugas;
@@ -39,7 +40,10 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         initComponents();
         tanggalTampil();
         jamTampil();
+        System.out.println("---" + OnlinePegawaiPool.kodePegawai);
+        jLabelNoID.setText(OnlinePegawaiPool.kodePegawai);
         TampilanAwal();
+        
     }
 
     /**
@@ -78,6 +82,8 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         jLabelTanggalTampil = new javax.swing.JLabel();
         jLabelJamTampil = new javax.swing.JLabel();
         jButtonTutupPalang = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelNoID = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemListPengunjung = new javax.swing.JMenuItem();
@@ -260,6 +266,12 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel5.setText("Selamat datang");
+
+        jLabelNoID.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        jLabelNoID.setText("jLabel9");
+
         jMenuFile.setText("File");
 
         jMenuItemListPengunjung.setText("List Pengunjung");
@@ -313,6 +325,10 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                     .addComponent(jPanelPengunjung, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jButtonLogout)
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelNoID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonBukaPalang, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -338,7 +354,9 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLogout)
                     .addComponent(jButtonBukaPalang)
-                    .addComponent(jButtonTutupPalang))
+                    .addComponent(jButtonTutupPalang)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelNoID))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -372,6 +390,7 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
         this.dispose();
         LoginFrame lf = new LoginFrame();
+        OnlinePegawaiPool.kodePegawai = null;
         lf.setVisible(true);
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
@@ -388,7 +407,7 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         Kunjungan kj = new Kunjungan();
         Petugas pt = new Petugas();
         kj.setPlat_nomor(jTextFieldNomorKendaraan.getText());
-        pt.setId_petugas("K.1234");
+        pt.setId_petugas(OnlinePegawaiPool.kodePegawai);
         kj.setId_petugas(pt);
         mb.setId_member(jTextFieldNoID.getText());
         kj.setId_member(mb);
@@ -417,7 +436,6 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
             } else {
                 System.out.println("Data Parkir gagal bertambah");
             }
-
         } catch (SQLException ex) {
             System.out.println("Gagal = " + ex);
         } catch (NullPointerException ex) {
@@ -514,6 +532,8 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         jTextFieldSaldo.disable();
         jTextFieldTanggal.disable();
         jTextFieldJamMasuk.disable();
+        
+        
     }
 
     /**
@@ -564,11 +584,13 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelGambarPalang;
     private javax.swing.JLabel jLabelJamTampil;
+    private javax.swing.JLabel jLabelNoID;
     private javax.swing.JLabel jLabelTanggalTampil;
     private javax.swing.JLabel jLabelxx;
     private javax.swing.JLabel jLabelyy;

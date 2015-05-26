@@ -19,7 +19,7 @@ public class AboutUS extends JFrame {
         JPanel basic = new JPanel();
         basic.setLayout(new BoxLayout(basic, BoxLayout.Y_AXIS));
         add(basic);
-        
+
         setDesign();
 
         JPanel topPanel = new JPanel(new BorderLayout(0, 0));
@@ -45,13 +45,14 @@ public class AboutUS extends JFrame {
         JTextPane pane = new JTextPane();
 
         pane.setContentType("text/html");
-        String text = 
-                 "<p>Sistem Parkir USD dibuat untuk memenuhi nilai Proyek Teknologi Informasi. "
+        String text
+                = "<p>Sistem Parkir USD dibuat untuk memenuhi nilai Proyek Teknologi Informasi. "
                 + "Berikut daftar pengembang :</p>"
                 + "<p>1. Dionisius Wisnu</b></p>"
-                + "<p>2. Engelbertus Vione</b></p>";
-                
-                
+                + "<p>2. Engelbertus Vione</b></p>"
+                + "<p>3. Octaviani</b></p>"
+                + "<p>4. Nicolaus E.W.N.</b></p>";
+
         pane.setText(text);
         pane.setEditable(false);
         textPanel.add(pane);
@@ -62,7 +63,6 @@ public class AboutUS extends JFrame {
 
 //        JCheckBox box = new JCheckBox("Show Tips at startup");
 //        box.setMnemonic(KeyEvent.VK_S);
-
 //        boxPanel.add(box);
         basic.add(boxPanel);
 

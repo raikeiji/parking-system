@@ -6,6 +6,7 @@
 package com.view;
 
 import com.control.LoginControl;
+import com.control.OnlinePegawaiPool;
 import com.model.LoginModel;
 import com.view.admin.AdminMainFrame;
 import com.view.in.PetugasMasukParkirFrame;
@@ -213,21 +214,33 @@ public class LoginFrame extends javax.swing.JFrame {
 
             lm.setId_petugas(jTextFieldNoID.getText());
             lm.setPassword(jPasswordField.getText());
-
+            
             status = cekDataLogin(lm);
+
 
             switch (status) {
                 case "penjagain":
+                    OnlinePegawaiPool.kodePegawai = (lm.getId_petugas());
+                    
                     com.view.in.PetugasMasukParkirFrame in = new PetugasMasukParkirFrame();
                     in.setVisible(true);
+                    System.out.println(" -- "+lm.getId_petugas());
+                    
                     break;
                 case "penjagaout":
+                    OnlinePegawaiPool.kodePegawai = (lm.getId_petugas());
                     com.view.out.PetugasKeluarParkirFrame out = new PetugasKeluarParkirFrame();
                     out.setVisible(true);
+                    
                     break;
-                case "admin" :
-                    com.view.admin.AdminMainFrame adm=new AdminMainFrame();
+                case "admin":
+                    OnlinePegawaiPool.kodePegawai = (lm.getId_petugas());
+                    com.view.admin.AdminMainFrame adm = new AdminMainFrame();
                     adm.setVisible(true);
+                    
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(rootPane, "Salah Nomor ID atau Password");
                     break;
             }
 
@@ -267,7 +280,7 @@ public class LoginFrame extends javax.swing.JFrame {
         String password = lg.getPassword();
 
         try {
-            conn=com.connection.Koneksi.getDBConnection();
+            conn = com.connection.Koneksi.getDBConnection();
             conn.setAutoCommit(true);
             String sql = "SELECT id_petugas, nama_petugas, password, status FROM PETUGAS WHERE ID_PETUGAS=? AND PASSWORD=?";
             prepare = conn.prepareStatement(sql);
@@ -281,7 +294,7 @@ public class LoginFrame extends javax.swing.JFrame {
             conn.commit();
             conn.close();
         } catch (SQLException e) {
-            
+
             conn.rollback();
         }
         return status;
@@ -291,7 +304,6 @@ public class LoginFrame extends javax.swing.JFrame {
 //        LoginControl kon = new LoginControl(com.connection.Koneksi.getDBConnection());
 //        return kon;
 //    }
-
     String status = "";
     private Connection conn = null;
 

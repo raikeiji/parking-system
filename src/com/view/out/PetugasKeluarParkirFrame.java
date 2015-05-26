@@ -6,6 +6,7 @@
 package com.view.out;
 
 import com.control.KeluarParkir.KeluarParkirControl;
+import com.control.OnlinePegawaiPool;
 import com.model.Kunjungan;
 import com.model.Member;
 import com.view.CetakBarCodeFrame;
@@ -32,6 +33,7 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form PetugasMainFrame
+     *
      * @throws java.sql.SQLException
      */
     public PetugasKeluarParkirFrame() throws SQLException {
@@ -78,6 +80,8 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
         jLabelTanggalTampil = new javax.swing.JLabel();
         jLabelJamTampil = new javax.swing.JLabel();
         jButtonTutupPalang = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelNoID = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemListPengunjung = new javax.swing.JMenuItem();
@@ -163,6 +167,12 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Jam Masuk");
 
+        jTextFieldJamMasuk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldJamMasukActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelNomorKendaraanLayout = new javax.swing.GroupLayout(jPanelNomorKendaraan);
         jPanelNomorKendaraan.setLayout(jPanelNomorKendaraanLayout);
         jPanelNomorKendaraanLayout.setHorizontalGroup(
@@ -184,29 +194,33 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
                             .addComponent(jTextFieldNoParkir)
                             .addComponent(jTextFieldNama)
                             .addComponent(jTextFieldSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))))
-                .addGap(100, 100, 100)
-                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(21, 21, 21))
-                    .addComponent(jLabel8)
-                    .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel7)))
-                .addGap(21, 21, 21)
                 .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextFieldPlatNomor, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldJamKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
-                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGap(101, 101, 101)
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jTextFieldJamMasuk))
-                            .addComponent(jTextFieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel6)
+                                .addGap(21, 21, 21))
+                            .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel7)))
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNomorKendaraanLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldJamMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldJamKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldPlatNomor, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                        .addComponent(jTextFieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(jLabelGambarPalang)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanelNomorKendaraanLayout.setVerticalGroup(
             jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,33 +232,35 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
                         .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldNoParkir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextFieldJamMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabelGambarPalang)
-                        .addComponent(jLabel6)
-                        .addComponent(jTextFieldHasilNoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5)))
+                    .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabelGambarPalang)
+                            .addComponent(jLabel6)
+                            .addComponent(jTextFieldHasilNoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldJamMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(jTextFieldJamKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNomorKendaraanLayout.createSequentialGroup()
-                            .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel8)
-                                .addComponent(jTextFieldPlatNomor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap()))
-                    .addComponent(jTextFieldSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextFieldSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jTextFieldJamKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldPlatNomor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))))
+                .addGap(12, 12, 12))
         );
 
         jButtonLogout.setText("Logout");
@@ -272,6 +288,12 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
                 jButtonTutupPalangActionPerformed(evt);
             }
         });
+
+        jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel9.setText("Selamat datang");
+
+        jLabelNoID.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        jLabelNoID.setText("jLabel9");
 
         jMenuFile.setText("File");
 
@@ -324,7 +346,11 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonLogout)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 488, Short.MAX_VALUE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelNoID)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonBukaPalang, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonTutupPalang, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -351,7 +377,10 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLogout)
                     .addComponent(jButtonBukaPalang)
-                    .addComponent(jButtonTutupPalang))
+                    .addComponent(jButtonTutupPalang)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabelNoID)))
                 .addGap(24, 24, 24))
         );
 
@@ -368,7 +397,7 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
 
     private void jMenuItemListPengunjungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListPengunjungActionPerformed
         try {
-            PetugasListKeluarPengunjungFrame p=new PetugasListKeluarPengunjungFrame();
+            PetugasListKeluarPengunjungFrame p = new PetugasListKeluarPengunjungFrame();
             p.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(PetugasKeluarParkirFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -382,8 +411,10 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCetakBarcodeActionPerformed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+       
         this.dispose();
-        com.view.LoginFrame l=new LoginFrame();
+        com.view.LoginFrame l = new LoginFrame();
+        OnlinePegawaiPool.kodePegawai = null;
         l.setVisible(true);
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
@@ -402,9 +433,11 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
         kj.setPlat_nomor(jTextFieldNomorKendaraan.getText());
         kj.setId_member(mb);
 
+        System.out.println("------------------" + mb.getId_member());
+
         try {
             if (KeluarParkirControl.getKoneksiKeluarParkir().cekDataMember(mb)) {
-                if (KeluarParkirControl.getKoneksiKeluarParkir().cekStatusKunjunganMember(kj)){
+                if (KeluarParkirControl.getKoneksiKeluarParkir().cekStatusKunjunganMember(kj)) {
                     KeluarParkirControl.getKoneksiKeluarParkir().tambahDataKunjunganKeluar(mb);
                     KeluarParkirControl.getKoneksiKeluarParkir().kurangSaldoMember(mb);
                     KeluarParkirControl.getKoneksiKeluarParkir().tampilDataMemberKeluar(kj);
@@ -428,10 +461,10 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
                     jLabelGambarPalang.setText("Palang terbuka");
                     jLabelGambarPalang.setPreferredSize(jTextFieldNoID.getPreferredSize());
                     jLabelGambarPalang.setForeground(Color.RED);
-                    
+
                 } else {
                     System.out.println("Member belum masuk parkir");
-                    
+
                 }
             } else {
                 System.out.println("Member tidak terdaftar");
@@ -459,9 +492,13 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTutupPalangActionPerformed
 
     private void jMenuItemTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTentangActionPerformed
-        com.view.AboutUS s=new com.view.AboutUS();
+        com.view.AboutUS s = new com.view.AboutUS();
         s.setVisible(true);
     }//GEN-LAST:event_jMenuItemTentangActionPerformed
+
+    private void jTextFieldJamMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldJamMasukActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldJamMasukActionPerformed
 
     public void tanggalTampil() {
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -473,7 +510,7 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
     }
 
     public void jamTampil() throws SQLException {
-        
+
         jLabelJamTampil.setFont(new Font("Dialog", 1, 30));
 //        this.getContentPane().setLayout(new FlowLayout());
 //        this.getContentPane().add(jLabel2);
@@ -516,14 +553,14 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
         new Timer(1000, taskPerformer).start();
     }
 
-    private void TampilanAwal(){
+    private void TampilanAwal() {
         jTextFieldNoID.setText("Masukkan nomor ID");
         jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());
         jTextFieldNoID.setForeground(Color.GRAY);
         jTextFieldNomorKendaraan.setText("Masukkan nomor plat");
         jTextFieldNomorKendaraan.setPreferredSize(jTextFieldNomorKendaraan.getPreferredSize());
         jTextFieldNomorKendaraan.setForeground(Color.GRAY);
-        
+
         jTextFieldHasilNoID.disable();
         jTextFieldNama.disable();
         jTextFieldPlatNomor.disable();
@@ -532,7 +569,10 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
         jTextFieldTanggal.disable();
         jTextFieldJamMasuk.disable();
         jTextFieldJamKeluar.disable();
+        
+        jLabelNoID.setText(OnlinePegawaiPool.kodePegawai);
     }
+
     /**
      * @param args the command line arguments
      * @throws java.lang.ClassNotFoundException
@@ -553,8 +593,8 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException x){
-            
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException x) {
+
         }
         //</editor-fold>
 
@@ -583,8 +623,10 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelGambarPalang;
     private javax.swing.JLabel jLabelJamTampil;
+    private javax.swing.JLabel jLabelNoID;
     private javax.swing.JLabel jLabelTanggalTampil;
     private javax.swing.JLabel jLabelxx;
     private javax.swing.JLabel jLabelyy;

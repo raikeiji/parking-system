@@ -149,7 +149,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldCariMember" min="-2" pref="266" max="-2" attributes="0"/>
+                              <Component id="jTextFieldCariMember" min="-2" pref="253" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButtonCariMember" min="-2" pref="74" max="-2" attributes="0"/>
                           </Group>
@@ -157,8 +157,12 @@
                               <Component id="jButtonLogout" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButtonKeluar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jLabelNoID" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextFieldCariPetugas" min="-2" pref="263" max="-2" attributes="0"/>
+                              <Component id="jTextFieldCariPetugas" min="-2" pref="242" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButtonCariPetugas" min="-2" pref="74" max="-2" attributes="0"/>
                           </Group>
@@ -196,6 +200,10 @@
                   <Component id="jButtonCariPetugas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldCariPetugas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonKeluar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelNoID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -365,6 +373,22 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonKeluarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ubuntu" size="15" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Selamat datang"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelNoID">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ubuntu" size="15" style="2"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="jLabel9"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

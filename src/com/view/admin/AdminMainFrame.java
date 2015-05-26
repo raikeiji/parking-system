@@ -5,6 +5,7 @@
  */
 package com.view.admin;
 
+import com.control.OnlinePegawaiPool;
 import com.control.admin.AdminControl;
 import com.model.DataMemberTableModel;
 import com.model.DataPetugasTableModel;
@@ -68,6 +69,8 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         jTextFieldCariPetugas = new javax.swing.JTextField();
         jButtonCariPetugas = new javax.swing.JButton();
         jButtonKeluar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelNoID = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemListPengunjung = new javax.swing.JMenuItem();
@@ -180,6 +183,12 @@ public final class AdminMainFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel9.setText("Selamat datang");
+
+        jLabelNoID.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        jLabelNoID.setText("jLabel9");
+
         jMenuFile.setText("File");
 
         jMenuItemListPengunjung.setText("List Pengunjung");
@@ -285,15 +294,19 @@ public final class AdminMainFrame extends javax.swing.JFrame {
                                 .addGap(0, 554, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonLogout)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonKeluar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabelNoID)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
@@ -322,7 +335,10 @@ public final class AdminMainFrame extends javax.swing.JFrame {
                     .addComponent(jButtonLogout)
                     .addComponent(jButtonCariPetugas)
                     .addComponent(jTextFieldCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonKeluar))
+                    .addComponent(jButtonKeluar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabelNoID)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -348,8 +364,9 @@ public final class AdminMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCetakBarcodeActionPerformed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
-        this.dispose();
+       this.dispose();
        com.view.LoginFrame l=new LoginFrame();
+       OnlinePegawaiPool.kodePegawai = null;
        l.setVisible(true);
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
@@ -497,6 +514,7 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         jTextFieldCariPetugas.setText("Cari berdasarkan Nomor ID Petugas");
         jTextFieldCariPetugas.setPreferredSize(jTextFieldCariPetugas.getPreferredSize());
         jTextFieldCariPetugas.setForeground(Color.GRAY);
+        jLabelNoID.setText(OnlinePegawaiPool.kodePegawai);
     }
     /**
      * @param args the command line arguments
@@ -545,7 +563,9 @@ public final class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelJamTampil;
+    private javax.swing.JLabel jLabelNoID;
     private javax.swing.JLabel jLabelTanggalTampil;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
