@@ -261,15 +261,33 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldNoIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNoIDMouseClicked
-        jTextFieldNoID.setText("");
+       jTextFieldNoID.setText("");
     }//GEN-LAST:event_jTextFieldNoIDMouseClicked
 
     private void jTextFieldNoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNoIDActionPerformed
-
+        try {
+            Member mb = new Member();
+            mb.setId_member(jTextFieldNoID.getText());
+            
+            EditMemberControl.getKoneksiEditMember().tampilDataMemberMasuk(mb);
+            jTextFieldSaldo.setText(mb.getSaldo());
+            jTextFieldNama.setText(mb.getNama_member());
+            jTextAreaAlamat.setText(mb.getAlamat());
+            
+            jButtonSimpan.setText("Ubah");
+        } catch (SQLException ex) {
+            jButtonSimpan.setText("Simpan");
+            Logger.getLogger(DaftarUpdateMemberForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTextFieldNoIDActionPerformed
 
     private void jTextFieldNamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNamaMouseClicked
-        jTextFieldNama.setText("");
+         
+        if (jTextFieldNama.equals("")) {
+            jTextFieldNama.setText("");
+        }else{
+            jTextFieldNama.setText(jTextFieldNama.getText()+"");
+        }
     }//GEN-LAST:event_jTextFieldNamaMouseClicked
 
     private void jButtonSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimpanActionPerformed
@@ -331,15 +349,26 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldSaldoActionPerformed
 
     private void jTextAreaAlamatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaAlamatMouseClicked
-        jTextAreaAlamat.setText("");
+          
+        if (jTextAreaAlamat.equals("")) {
+            jTextAreaAlamat.setText("");
+        }else{
+            jTextAreaAlamat.setText(jTextAreaAlamat.getText()+"");
+        }
     }//GEN-LAST:event_jTextAreaAlamatMouseClicked
 
     private void jTextFieldSaldoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldSaldoMouseClicked
-        jTextFieldSaldo.setText("");
+          
+        if (jTextFieldSaldo.equals("")) {
+            jTextFieldSaldo.setText("");
+        }else{
+            jTextFieldSaldo.setText(jTextFieldSaldo.getText()+"");
+        }
     }//GEN-LAST:event_jTextFieldSaldoMouseClicked
 
     private void jButtonBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatalActionPerformed
         tampilanawal();
+        jButtonSimpan.setText("Simpan");
     }//GEN-LAST:event_jButtonBatalActionPerformed
 
     private void jButtonKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKeluarActionPerformed

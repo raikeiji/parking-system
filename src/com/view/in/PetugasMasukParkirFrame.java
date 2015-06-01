@@ -12,6 +12,7 @@ import com.model.Member;
 import com.model.Petugas;
 import com.view.LoginFrame;
 import com.view.CetakBarCodeFrame;
+import com.view.TambahSaldoMemberForm;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -43,7 +45,7 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         System.out.println("---" + OnlinePegawaiPool.kodePegawai);
         jLabelNoID.setText(OnlinePegawaiPool.kodePegawai);
         TampilanAwal();
-        
+
     }
 
     /**
@@ -61,17 +63,16 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         jLabelxx = new javax.swing.JLabel();
         jTextFieldNoID = new javax.swing.JTextField();
         jTextFieldNomorKendaraan = new javax.swing.JTextField();
+        jButtonVerifikasi = new javax.swing.JButton();
         jPanelNomorKendaraan = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabelGambarPalang = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldHasilNoID = new javax.swing.JTextField();
-        jTextFieldNoParkir = new javax.swing.JTextField();
         jTextFieldNama = new javax.swing.JTextField();
         jTextFieldSaldo = new javax.swing.JTextField();
         jTextFieldTanggal = new javax.swing.JTextField();
@@ -87,6 +88,7 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemListPengunjung = new javax.swing.JMenuItem();
+        jMenuItemTambahSaldo = new javax.swing.JMenuItem();
         jMenuItemCetakBarcode = new javax.swing.JMenuItem();
         jMenuItemKeluar = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
@@ -120,6 +122,13 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonVerifikasi.setText("Verifikasi");
+        jButtonVerifikasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerifikasiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPengunjungLayout = new javax.swing.GroupLayout(jPanelPengunjung);
         jPanelPengunjung.setLayout(jPanelPengunjungLayout);
         jPanelPengunjungLayout.setHorizontalGroup(
@@ -131,9 +140,12 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                     .addComponent(jLabelyy))
                 .addGap(33, 33, 33)
                 .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelPengunjungLayout.createSequentialGroup()
+                        .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonVerifikasi))
                     .addComponent(jTextFieldNoID, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanelPengunjungLayout.setVerticalGroup(
             jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +157,8 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPengunjungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelyy)
-                    .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVerifikasi))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -156,8 +169,6 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         jLabel2.setText("No ID");
 
         jLabel3.setText("Saldo");
-
-        jLabel4.setText("No Parkir");
 
         jLabelGambarPalang.setFont(new java.awt.Font("Ubuntu", 2, 12)); // NOI18N
         jLabelGambarPalang.setForeground(new java.awt.Color(151, 149, 149));
@@ -182,12 +193,10 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                         .addComponent(jTextFieldHasilNoID, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
                     .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
                         .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
+                        .addGap(41, 41, 41)
                         .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldNoParkir)
                             .addComponent(jTextFieldNama)
                             .addComponent(jTextFieldSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))))
                 .addGap(101, 101, 101)
@@ -200,11 +209,12 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                         .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldTanggal)
-                            .addComponent(jTextFieldJamMasuk, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldJamMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(jLabelGambarPalang)
                 .addGap(62, 62, 62))
         );
@@ -216,27 +226,27 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                     .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldNoParkir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel7)
                             .addComponent(jTextFieldJamMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jTextFieldPlatNomor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelNomorKendaraanLayout.createSequentialGroup()
+                        .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabelGambarPalang)
+                            .addComponent(jLabel6)
+                            .addComponent(jTextFieldHasilNoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel8)
-                                .addComponent(jTextFieldPlatNomor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextFieldSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelNomorKendaraanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabelGambarPalang)
-                        .addComponent(jLabel6)
-                        .addComponent(jTextFieldHasilNoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -281,6 +291,14 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
             }
         });
         jMenuFile.add(jMenuItemListPengunjung);
+
+        jMenuItemTambahSaldo.setText("Tambah Saldo");
+        jMenuItemTambahSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTambahSaldoActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItemTambahSaldo);
 
         jMenuItemCetakBarcode.setText("Cetak Barcode");
         jMenuItemCetakBarcode.addActionListener(new java.awt.event.ActionListener() {
@@ -350,14 +368,14 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                 .addComponent(jPanelPengunjung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jPanelNomorKendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLogout)
                     .addComponent(jButtonBukaPalang)
                     .addComponent(jButtonTutupPalang)
                     .addComponent(jLabel5)
                     .addComponent(jLabelNoID))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -375,7 +393,7 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         try {
             //        PetugasListMasukPengunjungFrame p = new PetugasListMaseukPengunjungFrame();
 //        p.setVisible(true);
-            PetugasListMasukPengunjungFrame p=new PetugasListMasukPengunjungFrame();
+            PetugasListMasukPengunjungFrame p = new PetugasListMasukPengunjungFrame();
             p.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(PetugasMasukParkirFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -403,6 +421,47 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNomorKendaraanMouseClicked
 
     private void jButtonBukaPalangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBukaPalangActionPerformed
+        try {
+            Kunjungan kj = new Kunjungan();
+            Member mb=new Member();
+            mb.setId_member(jTextFieldNoID.getText());
+            kj.setId_member(mb);
+            
+            MasukParkirControl.getKoneksiMasukParkir().tampilDataMemberMasuk(kj);
+            
+            jLabelGambarPalang.setText("Palang terbuka");
+            jLabelGambarPalang.setPreferredSize(jTextFieldNoID.getPreferredSize());
+            jLabelGambarPalang.setForeground(Color.RED);
+            
+            JOptionPane.showMessageDialog(rootPane, "Data kunjungan telah ditambahkan dengan nomor parkir " + kj.getNo_parkir());
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PetugasMasukParkirFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonBukaPalangActionPerformed
+
+    private void jButtonTutupPalangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTutupPalangActionPerformed
+        jTextFieldNoID.setText("");
+        jTextFieldNomorKendaraan.setText("");
+        jTextFieldHasilNoID.setText("");
+        jTextFieldNama.setText("");
+        jTextFieldSaldo.setText("");
+//        jTextFieldNoParkir.setText("");
+        jTextFieldTanggal.setText("");
+        jTextFieldJamMasuk.setText("");
+        jTextFieldPlatNomor.setText("");
+        jLabelGambarPalang.setText("Palang tertutup");
+        jLabelGambarPalang.setPreferredSize(jTextFieldNoID.getPreferredSize());
+        jLabelGambarPalang.setForeground(Color.GRAY);
+
+    }//GEN-LAST:event_jButtonTutupPalangActionPerformed
+
+    private void jMenuItemTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTentangActionPerformed
+        com.view.AboutUS s = new com.view.AboutUS();
+        s.setVisible(true);
+    }//GEN-LAST:event_jMenuItemTentangActionPerformed
+
+    private void jButtonVerifikasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerifikasiActionPerformed
         Member mb = new Member();
         Kunjungan kj = new Kunjungan();
         Petugas pt = new Petugas();
@@ -417,52 +476,36 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
                 if (!MasukParkirControl.getKoneksiMasukParkir().cekStatusKunjunganMember(mb)) {
                     MasukParkirControl.getKoneksiMasukParkir().tambahDataKunjunganMasuk(kj);
                     MasukParkirControl.getKoneksiMasukParkir().tampilDataMemberMasuk(kj);
-
+//                    mb=new Member();
+//                    kj=new Kunjungan();
+//                    pt=new Petugas();
                     jTextFieldHasilNoID.setText(kj.getId_member().getId_member());
                     jTextFieldNama.setText(kj.getId_member().getNama_member());
                     jTextFieldSaldo.setText(kj.getId_member().getSaldo());
-                    jTextFieldNoParkir.setText(kj.getNo_parkir());
+//                    jTextFieldNoParkir.setText(kj.getNo_parkir());
                     jTextFieldTanggal.setText(kj.getTanggal_parkir());
                     jTextFieldJamMasuk.setText(kj.getJam_masuk());
                     jTextFieldPlatNomor.setText(kj.getPlat_nomor());
-                    jLabelGambarPalang.setText("Palang terbuka");
-                    jLabelGambarPalang.setPreferredSize(jTextFieldNoID.getPreferredSize());
-                    jLabelGambarPalang.setForeground(Color.RED);
-                    
 
                 } else {
-                    System.out.println("Gagal, status member sedang parkir");
+//                    System.out.println("Gagal, status member sedang parkir");
+                    JOptionPane.showMessageDialog(rootPane, "Gagal, status member sedang parkir");
                 }
             } else {
-                System.out.println("Data Parkir gagal bertambah");
+//                System.out.println("Data Parkir gagal bertambah");
+                JOptionPane.showMessageDialog(rootPane, "Data Parkir gagal bertambah");
             }
         } catch (SQLException ex) {
             System.out.println("Gagal = " + ex);
         } catch (NullPointerException ex) {
         }
 
-    }//GEN-LAST:event_jButtonBukaPalangActionPerformed
+    }//GEN-LAST:event_jButtonVerifikasiActionPerformed
 
-    private void jButtonTutupPalangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTutupPalangActionPerformed
-        jTextFieldNoID.setText("");
-        jTextFieldNomorKendaraan.setText("");
-        jTextFieldHasilNoID.setText("");
-        jTextFieldNama.setText("");
-        jTextFieldSaldo.setText("");
-        jTextFieldNoParkir.setText("");
-        jTextFieldTanggal.setText("");
-        jTextFieldJamMasuk.setText("");
-        jTextFieldPlatNomor.setText("");
-        jLabelGambarPalang.setText("Palang tertutup");
-        jLabelGambarPalang.setPreferredSize(jTextFieldNoID.getPreferredSize());
-        jLabelGambarPalang.setForeground(Color.GRAY);
-        
-    }//GEN-LAST:event_jButtonTutupPalangActionPerformed
-
-    private void jMenuItemTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTentangActionPerformed
-        com.view.AboutUS s=new com.view.AboutUS();
-        s.setVisible(true);
-    }//GEN-LAST:event_jMenuItemTentangActionPerformed
+    private void jMenuItemTambahSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTambahSaldoActionPerformed
+        com.view.TambahSaldoMemberForm t=new TambahSaldoMemberForm();
+        t.setVisible(true);
+    }//GEN-LAST:event_jMenuItemTambahSaldoActionPerformed
 
     public void tanggalTampil() {
 
@@ -528,12 +571,11 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
         jTextFieldHasilNoID.disable();
         jTextFieldNama.disable();
         jTextFieldPlatNomor.disable();
-        jTextFieldNoParkir.disable();
+//        jTextFieldNoParkir.disable();
         jTextFieldSaldo.disable();
         jTextFieldTanggal.disable();
         jTextFieldJamMasuk.disable();
-        
-        
+
     }
 
     /**
@@ -580,10 +622,10 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBukaPalang;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonTutupPalang;
+    private javax.swing.JButton jButtonVerifikasi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -600,6 +642,7 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemCetakBarcode;
     private javax.swing.JMenuItem jMenuItemKeluar;
     private javax.swing.JMenuItem jMenuItemListPengunjung;
+    private javax.swing.JMenuItem jMenuItemTambahSaldo;
     private javax.swing.JMenuItem jMenuItemTentang;
     private javax.swing.JPanel jPanelNomorKendaraan;
     private javax.swing.JPanel jPanelPengunjung;
@@ -608,7 +651,6 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldJamMasuk;
     private javax.swing.JTextField jTextFieldNama;
     private javax.swing.JTextField jTextFieldNoID;
-    private javax.swing.JTextField jTextFieldNoParkir;
     private javax.swing.JTextField jTextFieldNomorKendaraan;
     private javax.swing.JTextField jTextFieldPlatNomor;
     private javax.swing.JTextField jTextFieldSaldo;

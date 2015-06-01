@@ -9,6 +9,8 @@ import com.control.admin.editpetugas.EditPetugasControl;
 import com.model.Petugas;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -239,7 +241,19 @@ public class DaftarUpdatePetugasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNoIDMouseClicked
 
     private void jTextFieldNoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNoIDActionPerformed
-
+//        try {
+//            Petugas pt=new Petugas();
+//            pt.setId_petugas(jTextFieldNoID.getText());
+//            
+//            EditPetugasControl.getKoneksiEditPetugas().tampilDataPetugasMasuk(pt);
+//            jTextFieldNama.setText(pt.getNama_petugas());
+//            jTextFieldPassword.setText(pt.getPassword());
+//            int selected = Integer.parseInt(pt.getStatus());
+//            jComboBoxStatus.setSelectedIndex(selected);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DaftarUpdatePetugasForm.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
     }//GEN-LAST:event_jTextFieldNoIDActionPerformed
 
     private void jTextFieldNamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNamaMouseClicked
@@ -296,16 +310,16 @@ public class DaftarUpdatePetugasForm extends javax.swing.JFrame {
                 EditPetugasControl.getKoneksiEditPetugas().pendaftaranPetugasBaru(pt);
                 JOptionPane.showMessageDialog(rootPane, "Pendaftaran Berhasil");
             }
-
+            
         } catch (SQLException ex) {
             System.out.println("Kueri gagal : " + ex.getMessage());
         }
     }//GEN-LAST:event_jButtonSimpanActionPerformed
 
     private void jTextFieldPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPasswordMouseClicked
-        jTextFieldPassword.setText("");
+        jTextFieldPassword.setText("");                
     }//GEN-LAST:event_jTextFieldPasswordMouseClicked
-
+    
     private void tampilanawal() {
         jTextFieldNoID.setText("Input Nomor ID");
         jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());

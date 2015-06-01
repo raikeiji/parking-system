@@ -104,7 +104,22 @@ public class EditPetugasControl {
         }
         conn.close();
     }
-            
+     
+    public void hapusDataPetugasFromTableKunjungan(Kunjungan kun)throws SQLException{
+        PreparedStatement pstmt = null;
+        try {
+            String sql = "delete from KUNJUNGAN where ID_PETUGAS=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, kun.getId_petugas().getId_petugas());
+            pstmt.executeUpdate();
+            conn.commit();
+        } catch (SQLException exception) {
+            conn.rollback();
+            throw exception;
+        }
+        conn.close();
+    }
+    
     public void tampilDataPetugasMasuk(Petugas mem) throws SQLException {
         Statement stmt = conn.createStatement();
 //        Member member = new Member();

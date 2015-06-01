@@ -10,6 +10,7 @@ package com.control.admin.editmember;
 import com.connection.Koneksi;
 import com.model.Kunjungan;
 import com.model.Member;
+import com.model.Petugas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -102,7 +103,22 @@ public class EditMemberControl {
         }
         conn.close();
     }
-            
+     
+     public void hapusDataMemberFromTableKunjungan(Kunjungan kun)throws SQLException{
+        PreparedStatement pstmt = null;
+        try {
+            String sql = "delete from KUNJUNGAN where id_member=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, kun.getId_member().getId_member());
+            pstmt.executeUpdate();
+            conn.commit();
+        } catch (SQLException exception) {
+            conn.rollback();
+            throw exception;
+        }
+        conn.close();
+    }
+    
     public void tampilDataMemberMasuk(Member mem) throws SQLException {
         Statement stmt = conn.createStatement();
 //        Member member = new Member();
@@ -131,6 +147,35 @@ public class EditMemberControl {
         conn.close();
     }
 
+    public void tampilDataPetugasMasuk(Petugas mem) throws SQLException {
+        Statement stmt = conn.createStatement();
+//        Member member = new Member();
+//        String id_member = kunjungan.getId_member().getId_member();
+        String id_member=mem.getId_petugas();
+        String sql = "select * from PETUGAS where ID_PETUGAS='"+id_member+"'";
+        try {
+            ResultSet rset = stmt.executeQuery(sql);
+            while (rset.next()) {
+//                member.setId_member(rset.getString("id_member"));
+//                member.setNama_member(rset.getString("nama_member"));
+//                member.setSaldo(rset.getString("saldo"));
+//                kunjungan.setId_member(member);
+//                kunjungan.setNo_parkir(rset.getString("no_parkir"));
+//                kunjungan.setTanggal_parkir(rset.getString("tanggal_parkir"));
+//                kunjungan.setJam_masuk(rset.getString("jam_masuk"));
+//                kunjungan.setPlat_nomor(rset.getString("plat_nomor"));
+                mem.setNama_petugas(rset.getString(2));
+                mem.setPassword(rset.getString(3));
+                mem.setStatus(rset.getString(4));
+            }
+        } catch (SQLException x) {
+            System.out.println("Error = " + x.getMessage());
+        }
+        conn.commit();
+        conn.close();
+    }
+
+    
     public void tampilDataMemberMasuk(Kunjungan kunjungan) throws SQLException {
         Statement stmt = conn.createStatement();
         Member member = new Member();
@@ -156,6 +201,4 @@ public class EditMemberControl {
         conn.commit();
         conn.close();
     }
-
-    
 }

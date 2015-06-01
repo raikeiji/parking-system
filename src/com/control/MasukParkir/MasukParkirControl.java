@@ -171,9 +171,12 @@ public class MasukParkirControl {
         Statement stmt = conn.createStatement();
         Member member = new Member();
         String id_member = kunjungan.getId_member().getId_member();
+//        String sql = "select m.id_member, m.nama_member, m.saldo, k.no_parkir, k.tanggal_parkir, k.jam_masuk, k.plat_nomor "
+//                + "from member m, kunjungan k "
+//                + "where k.tanggal_parkir= TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND m.id_member = '" + id_member + "' AND k.id_member = '" + id_member + "'";
         String sql = "select m.id_member, m.nama_member, m.saldo, k.no_parkir, k.tanggal_parkir, k.jam_masuk, k.plat_nomor "
                 + "from member m, kunjungan k "
-                + "where k.tanggal_parkir= TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND m.id_member = '" + id_member + "' AND k.id_member = '" + id_member + "'";
+                + "where k.tanggal_parkir= TO_CHAR(SYSDATE, 'fmDD MON YYYY') AND m.id_member = k.id_member AND k.id_member = '" + id_member + "'";
         try {
             ResultSet rset = stmt.executeQuery(sql);
             while (rset.next()) {

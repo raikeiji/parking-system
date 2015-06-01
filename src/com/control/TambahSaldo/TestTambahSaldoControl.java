@@ -19,13 +19,16 @@ public class TestTambahSaldoControl {
 
     public static void main(String[] args) {
         Member mb = new Member();
-        mb.setSaldo("25000");
+//        mb.setSaldo("25000");
         mb.setId_member("125314001");
-        System.out.println(mb.getSaldo());
+        String saldo;
+       // System.out.println(mb.getSaldo());
         try {
             if (TambahSaldoControl.getKoneksiTambahSaldo().cekDataMember(mb)) {
-                TambahSaldoControl.getKoneksiTambahSaldo().tambahSaldo(mb);
-                System.out.println("Tambah saldo berhasil");
+                TambahSaldoControl.getKoneksiTambahSaldo().getLastSaldo(mb);
+                TambahSaldoControl.getKoneksiTambahSaldo().tambahSaldo(mb, 25000);
+                System.out.println("Tamba/h saldo berhasil");
+                
             } else {
                 System.out.println("Tambah saldo gagal, member tidak terdaftar");
             }

@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.control.TambahSaldo;
-
 
 import com.connection.Koneksi;
 import com.model.Member;
@@ -20,6 +18,7 @@ import java.sql.Statement;
  * @author Dion Wisnu
  */
 public class TambahSaldoControl {
+
     private Connection conn;
 
     public TambahSaldoControl(Connection koneksi) {
@@ -30,7 +29,7 @@ public class TambahSaldoControl {
         TambahSaldoControl kon = new TambahSaldoControl(Koneksi.getDBConnection());
         return kon;
     }
-    
+
     public boolean cekDataMember(Member member) throws SQLException {
         Statement stmt = conn.createStatement();
         String id_member = member.getId_member();
@@ -49,16 +48,44 @@ public class TambahSaldoControl {
         System.out.println("status : " + status);
         return status;
     }
-    
-    public void tambahSaldo(Member member)throws SQLException{
-        PreparedStatement pstmt = null;
+
+    public String getLastSaldo(Member member) throws SQLException {
+        Statement stmt = conn.createStatement();
+        String lastSaldo = null;
+        String sql = "select saldo from member "
+                + "where id_member='" + member.getId_member() + "'";
         try {
+            ResultSet rset = stmt.executeQuery(sql);
+            while (rset.next()) {
+                lastSaldo = rset.getString("saldo");
+            }
+        } catch (SQLException x) {
+            System.out.println("Error = " + x.getMessage());
+        }
+        conn.commit();
+        conn.close();
+        return lastSaldo;
+    }
+
+    public void tambahSaldo(Member member, int saldoBaru) throws SQLException {
+        PreparedStatement pstmt = null;
+
+        try {
+//            member = new Member();
+            String lastSaldo = getKoneksiTambahSaldo().getLastSaldo(member);
+            int saldoAkhir = Integer.parseInt(lastSaldo);
+            String currentSaldo = member.getSaldo();
+//            int saldoSekarang = Integer.parseInt(currentSaldo);
+            int totalSaldo = saldoAkhir + saldoBaru;
+            String newSaldo = String.valueOf(totalSaldo);
+            System.out.println(lastSaldo + " " + saldoBaru + " " + newSaldo);
+            
             String sql = "update member set saldo = ? where id_member = ?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, member.getSaldo());
-            pstmt.setString(2, member.getId_member());                     
+            pstmt.setString(1, newSaldo);
+            pstmt.setString(2, member.getId_member());
             pstmt.executeUpdate();
-            
+
         } catch (SQLException exception) {
             conn.rollback();
             throw exception;

@@ -42,6 +42,8 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         tanggalTampil();
         jamTampil();
         tampilanawal();
+        RuntimeException r=new RuntimeException();
+        
         DataMemberAktif();
         DataPetugasAktif();
     }
@@ -71,6 +73,7 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         jButtonKeluar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabelNoID = new javax.swing.JLabel();
+        jButtonRefresh = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemListPengunjung = new javax.swing.JMenuItem();
@@ -189,6 +192,13 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         jLabelNoID.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
         jLabelNoID.setText("jLabel9");
 
+        jButtonRefresh.setText("Refresh");
+        jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefreshActionPerformed(evt);
+            }
+        });
+
         jMenuFile.setText("File");
 
         jMenuItemListPengunjung.setText("List Pengunjung");
@@ -293,7 +303,8 @@ public final class AdminMainFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(0, 554, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonRefresh)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -322,23 +333,29 @@ public final class AdminMainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCariMember)
-                    .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonCariMember)
+                            .addComponent(jTextFieldCariMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jButtonRefresh)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonLogout)
-                    .addComponent(jButtonCariPetugas)
-                    .addComponent(jTextFieldCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonKeluar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
-                        .addComponent(jLabelNoID)))
+                        .addComponent(jLabelNoID))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonLogout)
+                        .addComponent(jButtonCariPetugas)
+                        .addComponent(jTextFieldCariPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonKeluar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -438,6 +455,15 @@ public final class AdminMainFrame extends javax.swing.JFrame {
         com.view.AboutUS s=new com.view.AboutUS();
         s.setVisible(true);
     }//GEN-LAST:event_jMenuItemTentangActionPerformed
+
+    private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
+        try {
+            DataMemberAktif();
+            DataPetugasAktif();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonRefreshActionPerformed
 
     public void tanggalTampil() {
 
@@ -561,6 +587,7 @@ public final class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCariPetugas;
     private javax.swing.JButton jButtonKeluar;
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JButton jButtonRefresh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;

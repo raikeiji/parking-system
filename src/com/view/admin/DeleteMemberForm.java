@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.view.admin;
 
 import com.control.admin.editmember.EditMemberControl;
+import com.model.Kunjungan;
 import com.model.Member;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -267,16 +267,30 @@ public class DeleteMemberForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNamaNamaMouseClicked
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        Member mb = new Member();
         try {
-            Member mb = new Member();
             mb.setId_member(jTextFieldNoID.getText());
-//            mb.setNama_member(jTextFieldNamaNama.getText());
-//            mb.setAlamat(jTextAreaAlamat.getText());
-//            mb.setSaldo(jTextFieldSaldo.getText());
+
             EditMemberControl.getKoneksiEditMember().hapusDataMember(mb);
             JOptionPane.showMessageDialog(rootPane, "Data telah dihapus");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Data digunakan pada table lain");
+            int selectedOption = JOptionPane.showConfirmDialog(null,
+                    "Data digunakan pada table lain, apakah ingin menghapus data di table kunjungan?",
+                    "Update",
+                    JOptionPane.YES_NO_OPTION);
+            if (selectedOption == JOptionPane.YES_OPTION) {
+                try {
+                    mb = new Member();
+                    mb.setId_member(jTextFieldNoID.getText());
+                    Kunjungan kt = new Kunjungan();
+                    kt.setId_member(mb);
+                    EditMemberControl.getKoneksiEditMember().hapusDataMemberFromTableKunjungan(kt);
+                    EditMemberControl.getKoneksiEditMember().hapusDataMember(mb);
+                    JOptionPane.showMessageDialog(rootPane, "Data "+kt.getId_member().getId_member()+" berhasil dihapus pada table kunjungan dan member");
+                } catch (SQLException ex1) {
+                    Logger.getLogger(DeleteMemberForm.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            }
             Logger.getLogger(DeleteMemberForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
@@ -286,14 +300,14 @@ public class DeleteMemberForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonKeluarActionPerformed
 
     private void jTextFieldNoIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNoIDKeyTyped
-        
+
     }//GEN-LAST:event_jTextFieldNoIDKeyTyped
 
     private void jButtonBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatalActionPerformed
         tampilanawal();
     }//GEN-LAST:event_jButtonBatalActionPerformed
 
-    private void tampilanawal(){
+    private void tampilanawal() {
         jTextFieldNoID.setText("Input dan enter");
         jTextFieldNoID.setPreferredSize(jTextFieldNoID.getPreferredSize());
         jTextFieldNoID.setForeground(Color.GRAY);
@@ -301,6 +315,7 @@ public class DeleteMemberForm extends javax.swing.JFrame {
         jTextFieldSaldo.setText("");
         jTextAreaAlamat.setText("");
     }
+
     /**
      * @param args the command line arguments
      */

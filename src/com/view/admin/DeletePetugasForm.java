@@ -8,6 +8,7 @@ package com.view.admin;
 
 import com.control.admin.editmember.EditMemberControl;
 import com.control.admin.editpetugas.EditPetugasControl;
+import com.model.Kunjungan;
 import com.model.Member;
 import com.model.Petugas;
 import java.awt.Color;
@@ -261,15 +262,32 @@ public class DeletePetugasForm extends javax.swing.JFrame {
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         try {
-            Petugas mb = new Petugas();
-            mb.setId_petugas(jTextFieldNoID.getText());
+            Petugas pt = new Petugas();
+            pt.setId_petugas(jTextFieldNoID.getText());
 //            mb.setNama_member(jTextFieldNamaNama.getText());
 //            mb.setAlamat(jTextAreaAlamat.getText());
 //            mb.setSaldo(jTextFieldSaldo.getText());
-            EditPetugasControl.getKoneksiEditPetugas().hapusDataPetugas(mb);
+            EditPetugasControl.getKoneksiEditPetugas().hapusDataPetugas(pt);
             JOptionPane.showMessageDialog(rootPane, "Data telah dihapus");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Data digunakan pada table lain");
+             int selectedOption = JOptionPane.showConfirmDialog(null,
+                    "Data digunakan pada table lain, apakah ingin menghapus data di table kunjungan?",
+                    "Update",
+                    JOptionPane.YES_NO_OPTION);
+            if (selectedOption == JOptionPane.YES_OPTION) {
+                try {
+                   Petugas pt = new Petugas();
+                    pt.setId_petugas(jTextFieldNoID.getText());
+                    Kunjungan kt = new Kunjungan();
+                    kt.setId_petugas(pt);
+                    EditPetugasControl.getKoneksiEditPetugas().hapusDataPetugasFromTableKunjungan(kt);
+                    EditPetugasControl.getKoneksiEditPetugas().hapusDataPetugas(pt);
+                    JOptionPane.showMessageDialog(rootPane, "Data "+kt.getId_petugas().getId_petugas()+" berhasil dihapus pada table kunjungan dan petugas");
+                } catch (SQLException ex1) {
+                    Logger.getLogger(DeleteMemberForm.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            }
+            Logger.getLogger(DeleteMemberForm.class.getName()).log(Level.SEVERE, null, ex);
             Logger.getLogger(DeleteMemberForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed

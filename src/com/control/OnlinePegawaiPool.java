@@ -20,11 +20,5 @@ public class OnlinePegawaiPool {
 
     public static void setKodePegawai(String kodePegawai) {
         OnlinePegawaiPool.kodePegawai = kodePegawai;
-    }
-
-    
-    
-    
-    
-    
+    }  
 }

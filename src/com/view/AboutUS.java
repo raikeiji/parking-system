@@ -46,7 +46,7 @@ public class AboutUS extends JFrame {
 
         pane.setContentType("text/html");
         String text
-                = "<p>Sistem Parkir USD dibuat untuk memenuhi nilai Proyek Teknologi Informasi. "
+                = "<p>Sistem Parkir USD Versi 4.0.0 dibuat untuk memenuhi nilai Proyek Teknologi Informasi. "
                 + "Berikut daftar pengembang :</p>"
                 + "<p>1. Dionisius Wisnu</b></p>"
                 + "<p>2. Engelbertus Vione</b></p>"
