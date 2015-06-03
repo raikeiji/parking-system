@@ -276,6 +276,7 @@ public class DaftarUpdateMemberForm extends javax.swing.JFrame {
             
             jButtonSimpan.setText("Ubah");
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Data tidak ada di database");
             jButtonSimpan.setText("Simpan");
             Logger.getLogger(DaftarUpdateMemberForm.class.getName()).log(Level.SEVERE, null, ex);
         }
