@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -432,6 +433,13 @@ public final class PetugasMasukParkirFrame extends javax.swing.JFrame {
             jLabelGambarPalang.setText("Palang terbuka");
             jLabelGambarPalang.setPreferredSize(jTextFieldNoID.getPreferredSize());
             jLabelGambarPalang.setForeground(Color.RED);
+            
+//            ImageIcon icon=new ImageIcon("./images/palangbuka.png");
+//            
+//        jLabelHasilKonversi.setIcon(icon);
+//        jLabelHasilKonversi.setSize(5, 5);
+//            jLabelGambarPalang.setIcon(icon);
+//            jLabelGambarPalang.setSize(60, 60);
             
             JOptionPane.showMessageDialog(rootPane, "Data kunjungan telah ditambahkan dengan nomor parkir " + kj.getNo_parkir());
 

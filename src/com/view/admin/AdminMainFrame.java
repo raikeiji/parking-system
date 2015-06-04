@@ -382,9 +382,10 @@ public final class AdminMainFrame extends javax.swing.JFrame {
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
        this.dispose();
-       com.view.LoginFrame l=new LoginFrame();
-       OnlinePegawaiPool.kodePegawai = null;
+       LoginFrame l=new LoginFrame();
        l.setVisible(true);
+       OnlinePegawaiPool.kodePegawai = null;
+       
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jMenuItemDaftarUpdateMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDaftarUpdateMemberActionPerformed

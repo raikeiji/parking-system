@@ -439,7 +439,7 @@ public final class PetugasKeluarParkirFrame extends javax.swing.JFrame {
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
 
         this.dispose();
-        com.view.LoginFrame l = new LoginFrame();
+        LoginFrame l=new LoginFrame();
         OnlinePegawaiPool.kodePegawai = null;
         l.setVisible(true);
     }//GEN-LAST:event_jButtonLogoutActionPerformed

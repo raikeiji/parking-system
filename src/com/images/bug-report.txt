@@ -1,2 +1,0 @@
-1) Mengetahui id_petugas yang akan sedang melakukan jaga parkir
-2) Tampil nama id yang sama pada list masuk dan list keluar di petugas
